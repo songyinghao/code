@@ -57,11 +57,11 @@
 
 ```
 /* good */
-foo {
+.foo {
 }
 
 /* bad */
-foo{
+.foo{
 }
 ```
 
@@ -69,15 +69,26 @@ foo{
 
 ```
 /* good */
-foo,
-foo2 {
+.foo,
+.foo2 {
 }
 
 /* bad */
-foo, foo2 {
+.foo, .foo2 {
 }
 ```
 
+#### [强制] `>`、`+`、`~` 选择器的两边各保留一个空格
+
+```
+/* good */
+ul > li {
+}
+
+/* bad */
+ul>li {
+}
+```
 
 ###  ID和class的命名
 
@@ -167,6 +178,8 @@ div.error {}
 
 ### 属性值
 
+#### [强制] 当一个熟悉有多个值的时候，`,` 后面必须跟一个空格
+
 #### [强制] 0 后面不用加单位。
 
 示例：
@@ -199,14 +212,28 @@ color: #ebc;
 #### [建议] 尽可能避免使用hacks。
 
 #### [强制] url 函数中的路径不加引号
-
-示例： 
+ 
 ```css
 background: url(bg.png);
 
 @import url(//www.google.com/css/go.css);
 ```
 
+#### [强制] 属性值由多个单词组成的，用双引号包围
+
+不允许使用单引号，不允许不加引号
+
+```
+/* good */
+.foo {
+	font-family:Cambria, "Hoefler Text", serif;
+}
+
+/* bad */
+.foo {
+	font-family:Cambria, Hoefler Text, serif;
+}
+```
  
 
 ###  前缀
