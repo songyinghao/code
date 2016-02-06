@@ -1,8 +1,36 @@
-[TOC]
+ [TOC]
+
+[1 前言](user-content-1-前言)
+
+[2 编程风格](user-content-2-编程风格)
+
+　　[2.1 结构](user-content-21-结构)
+
+　　　　[2.1.1 缩进](user-content-211-缩进)
+
+　　　　[2.1.2 空格](user-content-212-空格)
+
+　　　　[2.1.3 空行](user-content-213-空行)
+
+　　　　[2.1.4 换行](user-content-214-换行)
+
+　　[2.2 命名](user-content-22-命名)
+
+　　[2.3 注释](user-content-23-注释)
+
+[3 语言特性](user-content-3-语言特性)
+
+　　[3.1 变量](user-content-31-变量)
+
+　　[3.2 语句](user-content-32-语句)
+
+[4 附录](user-content-4-附录)
 
 # 通用编程规范
 
-## 前言
+## 1 前言
+
+### 1.1 说明
 
 有些编程规范是大部分编程语言通用的，特把它独立出来。
 
@@ -10,7 +38,7 @@
 
 本编程规范完全适用于 Java 和 Javascript 的编程规范，对其他语言也有借鉴作用。
 
-## 好的编程规范
+### 1.2 好的编程规范
 
 什么样的规范才算是好的编程规范？
 
@@ -25,15 +53,17 @@
 
 当然，也有一些个人的见解。
 
-## 基本准则
+### 1.3 基本准则
 
 ##### [建议] 坚持一致原则
 
 维护别人写的代码，应当遵守一致原则。即修改后的代码的编程风格应该与之前的代码一致。
 
-## 代码风格
+## 2 代码风格
 
-### 缩进
+### 2.1 结构
+
+#### 2.1.1 缩进
 
 ##### [强制] 采用 4 个空格缩进而不是 2 个空格或 tab 字符
 
@@ -56,13 +86,13 @@ void foo() {
 
 ```
 void foo() {
-	if (condition) {
-		// statement		
-	}
+    if (condition) {
+        // statement        
+    }
 }
 ```
 
-### 空格
+#### 2.1.2 空格
 
 ##### [强制] 注释时，注释符两边的空白符必不可少
 
@@ -169,12 +199,10 @@ void foo( int i) {}
 void foo(int i ) {}
 ```
 
-### 水平对齐
-
 ##### [建议] 水平对齐，不作要求，也不推荐
 
 虽然增加了代码的可读性，但给维护带来问题。很多时候为了保持对齐，做了一些无用功。所以即使对于已经使用水平对齐的代码，我们也不需要去保持这种风格。
- 
+
 
 ```
 // good
@@ -182,18 +210,18 @@ int foo = 1;
 String s = "foo";
 
 // bad
-int		foo = 1;
-String	s = "foo";
+int        foo = 1;
+String    s = "foo";
 
 // bad
-int		foo	= 1;
-String	s	= "foo";
+int        foo    = 1;
+String    s    = "foo";
 ```
 
-### 空行
+#### 2.1.3 空行
 
 ##### [强制] 类内连续成员之间，必须有 1 个空行
- 
+
 类内连续的成员（字段，构造函数，方法，嵌套类，静态初始化块，实例初始化块等）之间，必须有一个空行
 
 例外：两个连续字段之间的空行是可选的，用于字段的空行主要用来对字段进行逻辑分组。
@@ -204,14 +232,14 @@ String	s	= "foo";
 
 
 ##### [建议] 多个连续的空行是允许的，但没必要这样做，也不推荐这样做
- 
+
 ##### [建议] 在函数体内，语句的逻辑分组间使用空行
 
 这样做可增强代码的可读性
 
 ##### [建议] 没意义的空行不要乱加
 
-### 自动换行 
+#### 2.1.4 换行 
 
 ##### [强制] 列限制：80、100，还是 120？
 
@@ -219,10 +247,10 @@ String	s	= "foo";
 
 我推荐 100 个字符。
 
-任何一行如果超过这个字符数限制，必须自动换行。
- 
+任何一行如果超过这个字符数限制，必须换行。
+
 例外：
- 
+
 不可能满足列限制的行(例如，Javadoc中的一个长URL，或是一个长的JSNI方法参考)。
 package和import语句(见3.2节和3.3节)。
 注释中那些可能被剪切并粘贴到shell中的命令行。
@@ -237,11 +265,11 @@ package和import语句(见3.2节和3.3节)。
 ```
 // good
 int i = 1 + 2 + 3 + ... + 1000000
-	+ 1000001；
+    + 1000001；
 
 // bad
 int i = 1 + 2 + 3 + ... + 1000000 + 
-	1000001；
+    1000001；
 ```
 
 ##### [强制] 如果在赋值运算符处断开，通常的做法是在该符号后断开
@@ -250,11 +278,11 @@ int i = 1 + 2 + 3 + ... + 1000000 +
 ```
 // good，虽然在这里没必要换行
 int i = 
-	100000000;
+    100000000;
 
 // bad
 int i
-	= 100000000;
+    = 100000000;
 ```
 
 ##### [强制] 自动换行时函数名与左括号留在同一行
@@ -262,12 +290,12 @@ int i
 ##### [强制] 自动换行时逗号(,)与其前面的内容留在同一行
 
 ##### [强制] 自动换行时第一行后的每一行至少比第一行多缩进 4 个空格
- 
+
 ##### [强制] 非空块得换行遵守 K & R 风格
 
- 
+
 对于非空块，大括号遵循Kernighan和Ritchie风格 (Egyptian brackets):
- 
+
 * 左大括号前不换行
 * 左大括号后换行
 * 右大括号前换行
@@ -278,59 +306,41 @@ Java的enum类有一些例外，在 Java 编程规范讲解。
 ```
 // good
 class Foo {
-	public void foo() {
-		if (condition) {
-			something();
-		} else {
-			other();
-		}
-	}
+    public void foo() {
+        if (condition) {
+            something();
+        } else {
+            other();
+        }
+    }
 }
 
 // bad
 class 
-{	
+{    
 }
 
 // bad
 if (condition)
 {
-	something();
+    something();
 }
 else
 {
-	other();
+    other();
 }
 ```
 
 ##### [建议] 空块可以用简洁版本，不换行
 
 一个空的块状结构里什么也不包含，大括号可以简洁地写成{}，不需要换行。例外：如果它是一个多块语句的一部分(if/else 或 try/catch/finally) ，即使大括号内没内容，右大括号也要换行。
- 
+
 ```
 void doNothing() {}
 ```
 
-### 大括号
 
-##### [强制] 使用大括号(即使是可选的)
- 
-大括号与if, else, for, do, while语句一起使用，即使只有一条语句(或是空)，也应该把大括号写上。
-
-```
-// good
-if (i > 0) {
-	i++;
-}
-
-// bad
-if (i > 0)
-	i++;
-```
-
-### 语句
-
-### 命名
+### 2.2 命名
 
 ##### [强制] 类名以 UpperCamelCase 风格编写
 
@@ -426,110 +436,21 @@ List<Student> someStudent;
 // bad
 List<Student> list;
 ```
-
-### 变量声明
-
-##### [强制] 每次只声明一个变量
-
-```
-// good
-int foo;
-int foo2;
-
-// bad
-int foo, foo2;
-```
-
-##### [强制] 需要时才声明，并尽快进行初始化
- 
-不要在一个代码块的开头把局部变量一次性都声明了，而是在第一次需要使用它时才声明。 局部变量在声明时最好就进行初始化，或者声明后尽快进行初始化。
-
-变量声明与使用的距离越远，代码的阅读与维护成本就越高。
-
-从优化方面讲，这样做也是有好处的。
-
-### 语句
-
-##### [强制] 一行最多一个语句
-
-```
-// good
-int foo;
-int foo2;
-
-// bad
-int foo; int foo2;
-```
-
-### 赋值语句
-
-连续赋值不仅影响可读性，很多时候容易出错。
-
-### 
-##### [强制] 禁止连续赋值
-
-```
-// good
-a = 1;
-b = 1;
-c = 1;
-
-a = b = c = 1;
-```
-
-
-
-
-### 驼峰式命名法（CamelCase）
-
-驼峰式命名法分大驼峰式命名法(UpperCamelCase)和小驼峰式命名法(lowerCamelCase)。 有时，我们有不只一种合理的方式将一个英语词组转换成驼峰形式，如缩略语或不寻常的结构(例如"IPv6"或"iOS")。Google指定了以下的转换方案。
-
-名字从散文形式(prose form)开始:
-
-把短语转换为纯ASCII码，并且移除任何单引号。例如："Müller’s algorithm"将变成"Muellers algorithm"。
-把这个结果切分成单词，在空格或其它标点符号(通常是连字符)处分割开。
-推荐：如果某个单词已经有了常用的驼峰表示形式，按它的组成将它分割开(如"AdWords"将分割成"ad words")。 需要注意的是"iOS"并不是一个真正的驼峰表示形式，因此该推荐对它并不适用。
-现在将所有字母都小写(包括缩写)，然后将单词的第一个字母大写：最后将所有的单词连接起来得到一个标识符。
-每个单词的第一个字母都大写，来得到大驼峰式命名。
-除了第一个单词，每个单词的第一个字母都大写，来得到小驼峰式命名。
-示例：
-
-：
-
-```
-// good
-XmlHttpRequest // XML HTTP request
-newCustomerId // new customer ID
-innerStopwatch // inner stopwatch
-supportsIpv6OnIos // supports IPv6 on iOS
-YouTubeImporter // YouTube importer
-YoutubeImporter // 不推荐
-
-// bad
-XMLHTTPRequest
-newCustomerID
-innerStopWatch
-supportsIPv6OnIOS
-```
-
-
-Note：在英语中，某些带有连字符的单词形式不唯一。例如："nonempty"和"non-empty"都是正确的，因此方法名checkNonempty和checkNonEmpty也都是正确的。
-
-## 注释
+### 2.4 注释
 
 ##### [强制] 块注释与其周围的代码在同一缩进级别
 
 ```
 // good
 if (condition) {
-	// 这是一段注释
-	something();
+    // 这是一段注释
+    something();
 }
 
 // bad
 if (condition) {
 // 这是一段注释
-	something();
+    something();
 }
 ```
 
@@ -580,9 +501,9 @@ class Foo {
 // bad
 // 创建一个线程并执行
 new Thread(new Runnable() {
-	public void run() {
-		something();
-	}
+    public void run() {
+        something();
+    }
 }).start();
 ```
 
@@ -596,7 +517,103 @@ new Thread(new Runnable() {
 
 ##### [建议] 只进行必要的注释，注释不是越多越好
 
+## 3 语言特性
+
+### 3.1 变量
+
+##### [强制] 每次只声明一个变量
+
+```
+// good
+int foo;
+int foo2;
+
+// bad
+int foo, foo2;
+```
+
+##### [强制] 需要时才声明，并尽快进行初始化
+
+不要在一个代码块的开头把局部变量一次性都声明了，而是在第一次需要使用它时才声明。 局部变量在声明时最好就进行初始化，或者声明后尽快进行初始化。
+
+变量声明与使用的距离越远，代码的阅读与维护成本就越高。
+
+从优化方面讲，这样做也是有好处的。
+
+### 3.2 语句
+
+##### [强制] 一行最多一个语句
+
+```
+// good
+int foo;
+int foo2;
+
+// bad
+int foo; int foo2;
+```
+
+##### [强制] 禁止连续赋值
+
+连续赋值不仅影响可读性，很多时候容易出错。
+
+```
+// good
+a = 1;
+b = 1;
+c = 1;
+
+a = b = c = 1;
+```
+
+##### [强制] 使用大括号(即使是可选的)
+
+大括号与if, else, for, do, while语句一起使用，即使只有一条语句(或是空)，也应该把大括号写上。
+
+```
+// good
+if (i > 0) {
+    i++;
+}
+
+// bad
+if (i > 0)
+    i++;
+```
+
+## 4 附录
+
+### 4.1 驼峰式命名法（CamelCase）
+
+驼峰式命名法分大驼峰式命名法(UpperCamelCase)和小驼峰式命名法(lowerCamelCase)。 有时，我们有不只一种合理的方式将一个英语词组转换成驼峰形式，如缩略语或不寻常的结构(例如"IPv6"或"iOS")。Google指定了以下的转换方案。
+
+名字从散文形式(prose form)开始:
+
+把短语转换为纯ASCII码，并且移除任何单引号。例如："Müller’s algorithm"将变成"Muellers algorithm"。
+把这个结果切分成单词，在空格或其它标点符号(通常是连字符)处分割开。
+推荐：如果某个单词已经有了常用的驼峰表示形式，按它的组成将它分割开(如"AdWords"将分割成"ad words")。 需要注意的是"iOS"并不是一个真正的驼峰表示形式，因此该推荐对它并不适用。
+现在将所有字母都小写(包括缩写)，然后将单词的第一个字母大写：最后将所有的单词连接起来得到一个标识符。
+每个单词的第一个字母都大写，来得到大驼峰式命名。
+除了第一个单词，每个单词的第一个字母都大写，来得到小驼峰式命名。
+示例：
+
+：
+
+```
+// good
+XmlHttpRequest // XML HTTP request
+newCustomerId // new customer ID
+innerStopwatch // inner stopwatch
+supportsIpv6OnIos // supports IPv6 on iOS
+YouTubeImporter // YouTube importer
+YoutubeImporter // 不推荐
+
+// bad
+XMLHTTPRequest
+newCustomerID
+innerStopWatch
+supportsIPv6OnIOS
+```
 
 
-
-
+Note：在英语中，某些带有连字符的单词形式不唯一。例如："nonempty"和"non-empty"都是正确的，因此方法名checkNonempty和checkNonEmpty也都是正确的。
