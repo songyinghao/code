@@ -1,30 +1,30 @@
  [TOC]
 
-[1 前言](user-content-1-前言)
+[1 前言](#user-content-1-前言)
 
-[2 编程风格](user-content-2-编程风格)
+[2 编程风格](#user-content-2-编程风格)
 
-　　[2.1 结构](user-content-21-结构)
+　　[2.1 结构](#user-content-21-结构)
 
-　　　　[2.1.1 缩进](user-content-211-缩进)
+　　　　[2.1.1 缩进](#user-content-211-缩进)
 
-　　　　[2.1.2 空格](user-content-212-空格)
+　　　　[2.1.2 空格](#user-content-212-空格)
 
-　　　　[2.1.3 空行](user-content-213-空行)
+　　　　[2.1.3 空行](#user-content-213-空行)
 
-　　　　[2.1.4 换行](user-content-214-换行)
+　　　　[2.1.4 换行](#user-content-214-换行)
 
-　　[2.2 命名](user-content-22-命名)
+　　[2.2 命名](#user-content-22-命名)
 
-　　[2.3 注释](user-content-23-注释)
+　　[2.3 注释](#user-content-23-注释)
 
-[3 语言特性](user-content-3-语言特性)
+[3 语言特性](#user-content-3-语言特性)
 
-　　[3.1 变量](user-content-31-变量)
+　　[3.1 变量](#user-content-31-变量)
 
-　　[3.2 语句](user-content-32-语句)
+　　[3.2 语句](#user-content-32-语句)
 
-[4 附录](user-content-4-附录)
+[4 附录](#user-content-4-附录)
 
 # 通用编程规范
 
