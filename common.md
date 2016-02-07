@@ -2,7 +2,7 @@
 
 [1 前言](#user-content-1-前言)
 
-[2 编程风格](#user-content-2-编程风格)
+[2 编程风格](#user-content-2-代码风格)
 
 　　[2.1 结构](#user-content-21-结构)
 
@@ -436,7 +436,7 @@ List<Student> someStudent;
 // bad
 List<Student> list;
 ```
-### 2.4 注释
+### 2.3 注释
 
 ##### [强制] 块注释与其周围的代码在同一缩进级别
 
