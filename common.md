@@ -2,7 +2,7 @@
 
 [1 前言](#user-content-1-前言)
 
-[2 编程风格](#user-content-2-代码风格)
+[2 代码风格](#user-content-2-代码风格)
 
 　　[2.1 结构](#user-content-21-结构)
 

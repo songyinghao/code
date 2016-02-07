@@ -1,64 +1,68 @@
-[TOC]
+ [TOC]
+
+[1 前言](#user-content-1-前言)
+ 
+[2 代码风格](#user-content-2-代码风格)
+ 
+　　[2.1 文件](#user-content-21-文件)
+
+　　[2.2 结构](#user-content-22-结构)
+ 
+　　　　[2.2.1 缩进](#user-content-221-缩进)
+ 
+　　　　[2.2.2 空格](#user-content-222-空格)
+ 
+　　　　[2.2.3 空行](#user-content-223-空行)
+ 
+　　　　[2.2.4 换行](#user-content-224-换行)
+ 
+　　[2.3 命名](#user-content-22-命名)
+ 
+　　[2.4 注释](#user-content-23-注释)
+ 
+[3 语言特性](#user-content-3-语言特性)
+ 
+　　[3.1 条件表达式](#user-content-31-条件表达式)
+ 
+　　[3.2 自增自减](#user-content-32-自增自减)
+
+　　[3.3 位运算符](#user-content-32-位运算符)
+ 
+[4 待办事项](#user-content-4-待办事项)
+
+[5 最佳实践](#user-content-5-最佳实践)
 
 # Java编程规范
- 
-## 前言
+
+## 1 前言
 
 Java编程必须遵守[通用编程规范](common.md)和本编程规范。
 
-## 源文件基础
+## 2 代码风格
 
-## 2.1 文件名
- 
-源文件以其最顶层的类名来命名，大小写敏感，文件扩展名为.java。
- 
-## 2.2 文件编码：UTF-8
- 
+### 2.1 文件
+
 #### [建议] 源文件编码格式为UTF-8。
- 
-## 2.3 特殊字符
- 
-#### 2.3.1 空白字符
- 
-除了行结束符序列，ASCII水平空格字符(0x20，即空格)是源文件中唯一允许出现的空白字符，这意味着：
- 
-所有其它字符串中的空白字符都要进行转义。
-制表符不用于缩进。
+
+### 2.2 结构
+
+### 2.3 命名
 
 #### 2.3.2 特殊转义序列
- 
-对于具有特殊转义序列的任何字符(\b, \t, \n, \f, \r, \“, \‘及\)，我们使用它的转义序列，而不是相应的八进制(比如\012)或Unicode(比如\u000a)转义。
- 
-#### 2.3.3 非ASCII字符
- 
-对于剩余的非ASCII字符，是使用实际的Unicode字符(比如∞)，还是使用等价的Unicode转义符(比如\u221e)，取决于哪个能让代码更易于阅读和理解。
- 
-Tip: 在使用Unicode转义符或是一些实际的Unicode字符时，建议做些注释给出解释，这有助于别人阅读和理解。
- 
-例如：
- 
-String unitAbbrev = "μs";                                 | 赞，即使没有注释也非常清晰
-String unitAbbrev = "\u03bcs"; // "μs"                    | 允许，但没有理由要这样做
-String unitAbbrev = "\u03bcs"; // Greek letter mu, "s"    | 允许，但这样做显得笨拙还容易出错
-String unitAbbrev = "\u03bcs";                            | 很糟，读者根本看不出这是什么
-return '\ufeff' + content; // byte order mark             | Good，对于非打印字符，使用转义，并在必要时写上注释
-Tip: 永远不要由于害怕某些程序可能无法正确处理非ASCII字符而让你的代码可读性变差。当程序无法正确处理非ASCII字符时，它自然无法正确运行， 你就会去fix这些问题的了。(言下之意就是大胆去用非ASCII字符，如果真的有需要的话)
- 
+
 源文件结构
 一个源文件包含(按顺序地)：
- 
+
 许可证或版权信息(如有需要)
 package语句
 import语句
 一个顶级类(只有一个)
 以上每个部分之间用一个空行隔开。
- 
-### 3.1 许可证或版权信息
- 
+
 ### 3.2 package语句
 
 ##### [强制] package语句不换行
- 
+
 ### 3.3 import语句
 
 ##### [强制] import 语句不要使用通配符
@@ -79,22 +83,22 @@ import java.util.*;
 ##### [建议] import语句按照一定的规则分组
 
 import语句分为以下几组，按照这个顺序，每组由一个空行分隔：
- 
+
 所有的静态导入独立成组  
 com.google imports(仅当这个源文件是在com.google包下)   
 第三方的包。每个顶级包为一组，字典序。例如：android, com, junit, org, sun  
 java imports  
 javax imports  
 组内不空行，按字典序排列。  
- 
+
 ### 3.4 类声明
- 
+
 3.4.1 只有一个顶级类声明
- 
+
 每个顶级类都在一个与它同名的源文件中(当然，还包含.java后缀)。
- 
+
 例外：package-info.java，该文件中可没有package-info类。
- 
+
 ##### [建议] 每个类应该以某种逻辑去排序它的成员
 
 新的方法不能总是习惯性地添加到类的结尾
@@ -117,91 +121,14 @@ javax imports
 一个类的多个构造函数，或是多个同名方法，这些函数/方法应该按顺序出现在一起，中间不要放进其它函数/方法。
 
 
- 
+
 ### 4.7 用小括号来限定组：推荐
- 
+
 除非作者和reviewer都认为去掉小括号也不会使代码被误解，或是去掉小括号能让代码更易于阅读，否则我们不应该去掉小括号。 我们没有理由假设读者能记住整个Java运算符优先级表。
- 
-### 4.8 具体结构
- 
-#### 4.8.1 枚举类
- 
-枚举常量间用逗号隔开，换行可选。
- 
-没有方法和文档的枚举类可写成数组初始化的格式：
- 
-private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
-由于枚举类也是一个类，因此所有适用于其它类的格式规则也适用于枚举类。
- 
 
- 
-#### 4.8.3 数组
 
-##### [建议] 数组初始化可写成块状结构
- 
-```
-new int[] { 0, 1, 2, 3 };
 
-new int[] {
-  0, 1, 2, 3
-};
- 
-new int[] {
-  0,
-  1,
-  2,
-  3
-};
- 
-new int[] {
-  0, 1,
-  2, 3
-};
- 
-new int[]
-    {0, 1, 2, 3};
-```
 
-##### [强制] 非C语言风格的数组声明
-
-中括号是类型的一部分。
-
-```
-// good
-String[] args;
-
-// bad
-String args[];
-```
-
-### switch语句
-
-##### [强制] switch 语句内的语句组必须正确的终止
-
-所有 case 语句和 default 语句必须满足三条规范之一：
-1. 语句通过break、continue、return 或抛出异常来终止。如示例的 `case 3`。
-2. 语句通过一条注释来说明程序将继续执行到下一个语句组。如示例的 `case 2`。
-3. 语句希望继续执行到下一个语句组，并且语句内不需要执行任何代码，此时语句内不允许任何空行。如示例的 `case 1`。
-
-```
-switch (input) {
-	case 1: // 注意case 1 与 case 2 之间不能有空行
-	case 2:
-    	prepareOneOrTwo();
-    	// 不用break
-	case 3:
-    	handleOneTwoOrThree();
-    	break;
-	default:
-    	handleLargeNumber(input);
-		break;
-}
-```
-
-##### [强制] switch 语句必须包含 default 语句，并且写在所有 case 语句的后面
-
-即使 default 语句什么代码也不包含，你也必须这么做
- 
 ### 注解
 
 ##### [建议] 一个注解独占一行。位于方法的前面，Javadoc（如果有的话）的后面。
@@ -223,15 +150,9 @@ public String getNameIfPresent() { ... }
 @Partial @Mock DataLoader loader;
 ```
 
-##### [建议] 类和成员的修饰符应该按顺序出现
+### 2.3 命名
 
-推荐的顺序：
- 
-public protected private abstract static final transient volatile synchronized native strictfp
- 
-## 命名约定
-
-### 5.1 对所有标识符都通用的规则
+#### 5.1 对所有标识符都通用的规则
 
 ##### [强制] 标识符只能使用ASCII字母和数字
 
@@ -273,59 +194,9 @@ com.google.util.imageTool
 com.google.util.image_tool
 ```
 
-## 编程实践
+### 2.4 注释
 
-##### [强制] 只要是合法的，就把@Override注解给用上
-
-
-##### [强制] 捕获的异常必须处理
-
-常见的处理方式就是打印日志。
-
-如果它被认为是不可能的，则把它当作一个AssertionError重新抛出。
-
-如果它确实是不需要在catch块中做任何响应，需要做注释加以说明。
-
-```
-try {
-	int i = Integer.parseInt(response);
-	return handleNumericResponse(i);
-} catch (NumberFormatException ok) {
-	// it's not numeric; that's fine, just continue
-}
-return handleTextResponse(response);
-```
-
-例外：在测试中，如果一个捕获的异常被命名为expected，则它可以被不加注释地忽略。下面是一种非常常见的情形，用以确保所测试的方法会抛出一个期望中的异常， 因此在这里就没有必要加注释。
-
-```
-try {
-  emptyStack.pop();
-  fail();
-} catch (NoSuchElementException expected) {
-}
-```
-
-##### [强制] 静态成员必须使用类进行调用
-
-```
-class Foo {
-	public static void foo() {
-	}
-}
-
-// good
-Foo.foo();
-
-// bad
-new Foo().foo();
-```
-
-##### [强制] 禁止重载Object.finalize
-
-如果你觉得非要重载Object.finalize不可，请先仔细阅读和理解《Effective Java》 第7条：“Avoid Finalizers”，然后不要使用它。
-
-## Javadoc
+#### Javadoc
 
 ### 7.1 格式
 
@@ -373,7 +244,7 @@ Tip：一个常见的错误是把简单的Javadoc写成/** @return the customer 
 // bad
 /** 返回学生数量 */
 public int getStudentCount() {
-	return studentCount;
+    return studentCount;
 }
 ```
 
@@ -394,7 +265,7 @@ public String getCanonicalName() {
 ##### [建议] 对于包外不可见的类、方法和数据成员，如有需要，也是要使用Javadoc的
 
 
-## 语句
+## 2 语言特性
 
 ### 条件表达式
 
@@ -403,24 +274,24 @@ public String getCanonicalName() {
 
 ```
 boolean isOk = true;
-	
-// good	
+    
+// good    
 if (isOk) {
-	
+    
 } 
 
 // good
 if (!isOk) {
-			
+            
 }
 
 // bad
 if (isOk == true) {
-			
+            
 }
 
 if (isOk == false) {
-			
+            
 }
 ```
 
@@ -522,13 +393,99 @@ i = (x >= 0) ? x : -x;
 
 // bad
 if (x >= 0) {
-	i = x;
+    i = x;
 } else {
-	i = -x;
+    i = -x;
 }
 ```
 
-## 待办事项
+### switch语句
+
+##### [强制] switch 语句内的语句组必须正确的终止
+
+所有 case 语句和 default 语句必须满足三条规范之一：
+1. 语句通过break、continue、return 或抛出异常来终止。如示例的 `case 3`。
+2. 语句通过一条注释来说明程序将继续执行到下一个语句组。如示例的 `case 2`。
+3. 语句希望继续执行到下一个语句组，并且语句内不需要执行任何代码，此时语句内不允许任何空行。如示例的 `case 1`。
+
+```
+switch (input) {
+    case 1: // 注意case 1 与 case 2 之间不能有空行
+    case 2:
+        prepareOneOrTwo();
+        // 不用break
+    case 3:
+        handleOneTwoOrThree();
+        break;
+    default:
+        handleLargeNumber(input);
+        break;
+}
+```
+
+##### [强制] switch 语句必须包含 default 语句，并且写在所有 case 语句的后面
+
+即使 default 语句什么代码也不包含，你也必须这么做
+
+### 数组
+
+##### [建议] 数组初始化可写成块状结构
+
+```
+new int[] { 0, 1, 2, 3 };
+
+new int[] {
+  0, 1, 2, 3
+};
+ 
+new int[] {
+  0,
+  1,
+  2,
+  3
+};
+ 
+new int[] {
+  0, 1,
+  2, 3
+};
+ 
+new int[]
+    {0, 1, 2, 3};
+```
+
+##### [强制] 非C语言风格的数组声明
+
+中括号是类型的一部分。
+
+```
+// good
+String[] args;
+
+// bad
+String args[];
+```
+
+### 类
+
+
+##### [建议] 类和成员的修饰符应该按顺序出现
+
+推荐的顺序：
+
+public protected private abstract static final transient volatile synchronized native strictfp
+
+
+####  枚举类
+
+枚举常量间用逗号隔开，换行可选。
+
+没有方法和文档的枚举类可写成数组初始化的格式：
+
+private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+由于枚举类也是一个类，因此所有适用于其它类的格式规则也适用于枚举类。
+
+## 3 待办事项
 
 ##### [强制] TODO 前后保持一个空格
 
@@ -563,3 +520,54 @@ if (x >= 0) {
 // FIXME 当用户没有输入时，这里有bug，需加个判断
 ```
 
+## 4 编程实践
+
+##### [强制] 只要是合法的，就把@Override注解给用上
+
+
+##### [强制] 捕获的异常必须处理
+
+常见的处理方式就是打印日志。
+
+如果它被认为是不可能的，则把它当作一个AssertionError重新抛出。
+
+如果它确实是不需要在catch块中做任何响应，需要做注释加以说明。
+
+```
+try {
+    int i = Integer.parseInt(response);
+    return handleNumericResponse(i);
+} catch (NumberFormatException ok) {
+    // it's not numeric; that's fine, just continue
+}
+return handleTextResponse(response);
+```
+
+例外：在测试中，如果一个捕获的异常被命名为expected，则它可以被不加注释地忽略。下面是一种非常常见的情形，用以确保所测试的方法会抛出一个期望中的异常， 因此在这里就没有必要加注释。
+
+```
+try {
+  emptyStack.pop();
+  fail();
+} catch (NoSuchElementException expected) {
+}
+```
+
+##### [强制] 静态成员必须使用类进行调用
+
+```
+class Foo {
+    public static void foo() {
+    }
+}
+
+// good
+Foo.foo();
+
+// bad
+new Foo().foo();
+```
+
+##### [强制] 禁止重载Object.finalize
+
+如果你觉得非要重载Object.finalize不可，请先仔细阅读和理解《Effective Java》 第7条：“Avoid Finalizers”，然后不要使用它。
