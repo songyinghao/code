@@ -24,6 +24,8 @@
 
 　　[3.2 语句](#user-content-32-语句)
 
+　　[3.3 函数](#user-content-33-函数)
+
 [4 附录](#user-content-4-附录)
 
 # 通用编程规范
@@ -128,6 +130,7 @@ if(foo == 0) {
 ```
 
 ##### [强制] 任何保留字(如else、catch等)与其前面的右大括号之间要有一个空格
+
 ```
 // good
 if (foo == 0) {
@@ -163,6 +166,22 @@ int i = 1 + 2;
 
 // bad
 int i = 1+2;
+```
+
+##### [强制] 一元运算符与操作对象之间不允许有空格
+
+```
+// good
+if (!isOk) {
+}
+
+i++;
+
+// bad
+if (! isOk) {
+}
+
+i ++;
 ```
 
 ##### [强制] 在 `,`、`:`、`;` 及右括号 `)` 后必须空格
@@ -342,11 +361,19 @@ void doNothing() {}
 
 ### 2.2 命名
 
+##### [强制] 良好的命名应该是自解释的
+
+良好的命名应该能够顾名思义，不需要注释
+
+```
+// good
+int studentCount;
+
+// bad
+int count; // 学生数量
+```
+
 ##### [强制] 类名以 UpperCamelCase 风格编写
-
-类名通常是名词或名词短语，接口名称有时可能是形容词或形容词短语。现在还没有特定的规则或行之有效的约定来命名注解类型。
-
-测试类的命名以它要测试的类的名称开始，以Test结束。例如，HashTest或HashIntegrationTest。
 
 ```
 // good
@@ -358,9 +385,23 @@ class foo {
 }
 ```
 
+##### [强制] 类名使用名词或名词短语
+
+##### [建议] 接口使用形容词或形容词短语
+
+##### [强制] 测试类的命名以它要测试的类的名称开始，以 Test 结束
+
+```
+class HashTest {
+}
+
+HashIntegrationTest {
+}
+```
+
 ##### [强制] 方法名以 lowerCamelCase 风格编写
 
-方法名通常是动词或动词短语。
+##### [建议] 方法名使用动宾短语
 
 下划线可能出现在JUnit测试方法名称中用以分隔名称的逻辑组件。一个典型的模式是：test<MethodUnderTest>_<state>，例如testPop_emptyStack。 并不存在唯一正确的方式来命名测试方法。
 
@@ -421,6 +462,16 @@ int int MAX_COUNT = 99;
 
 * 单个的大写字母，后面可以跟一个数字(如：E, T, X, T2)。
 * 以类命名方式(5.2.2节)，后面加个大写的T(如：RequestT, FooBarT)。
+
+##### [建议] boolean 类型的变量命名以 is 或 has 开头
+
+```
+// good
+boolean isReady = false;
+
+// bad
+boolean ready = false;
+```
 
 ##### [建议] 集合、数组类型的变量，常用名词复数
 
@@ -540,6 +591,27 @@ int foo, foo2;
 
 从优化方面讲，这样做也是有好处的。
 
+##### [建议] 尽量使用局部变量
+ 
+Java：
+> 尽量使用局部变量，调用方法时传递的参数以及在调用中创建的临时变量都保存在栈（Stack）中，速度较快。其他变量，如静态变量、实例变量等，都在堆（Heap）中创建，速度较慢。另外，依赖于具体的编译器/JVM，局部变量还可能得到进一步优化
+
+##### [建议] 变量在真正需要的时候才开始创建
+
+```
+// good
+if (i == 1) {
+    String str = "abc";
+    list.add(str);
+}
+
+// bad
+String str = "abc";
+if (i == 1) {
+    list.add(str);
+}
+```
+
 ### 3.2 语句
 
 ##### [强制] 一行最多一个语句
@@ -580,6 +652,106 @@ if (i > 0) {
 if (i > 0)
     i++;
 ```
+
+### 条件
+
+##### [建议] 对于相同变量或表达式的多值条件，用 switch 代替 if
+
+```
+// good
+switch (i) {
+    case 1:
+        // ......
+        break;
+    case 2:
+    case 3:
+    case 4:
+        // ......
+        break;
+}
+
+// bad
+if (i == 1) {
+    // ......
+} else if (i == 1 || i == 2 || i == 3) {
+    // ......
+}
+```
+
+##### [建议] 如果函数或全局中的 else 块后没有任何语句，可以删除 else
+
+```
+// good
+function getName() {
+    if (name) {
+        return name;
+    }
+
+    return 'unnamed';
+}
+
+// bad
+function getName() {
+    if (name) {
+        return name;
+    } else {
+        return 'unnamed';
+    }
+}
+```
+
+### 循环
+
+##### [建议] 避免在循环中重复获取长度
+
+```java
+// bad
+for (int i = 0; i < list.size(); i++) {
+}
+
+// good
+for (int i = 0, int size = list.size(); i < size; i++) {
+}
+
+// good
+int size = list.size();
+for (int i = 0, ; i < size; i++) {
+}
+```
+
+##### [建议] 嵌套循环将小循环写在外层
+
+```
+// good
+for (int i = 0; i < 5; i++) {
+	for (int k = 0; k < 5000; k++) {
+	}
+}
+
+// bad
+for (int k = 0; k < 5000; k++) {
+	for (int i = 0; i < 5; i++) {
+	}
+}
+```
+
+##### [建议] 避免在循环中做耗时的工作
+
+* 循环中不要使用try-catch()语句
+* 不要在循环中调用synchronized(同步)方法
+* 循环中不要频繁声明对象，对象可以在循环外创建
+* 循环中尽量避免数据库查询操作等耗时的操作
+* ......
+
+### 3.3 函数
+
+##### [建议] 函数的长度控制在 50 行以内
+
+太长的函数难以维护
+
+##### [建议] 函数的参数控制在 6 个以内
+
+
 
 ## 4 附录
 
