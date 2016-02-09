@@ -183,6 +183,8 @@ TODO 这条建议是否应该改成强制？
 Button btnClose; // 关闭按钮
 ```
 
+#### 包命名规范
+
 ##### [强制] 包名全部小写，连续的单词只是简单地连接起来，不使用下划线
 
 ```
@@ -192,6 +194,35 @@ com.google.util.imagetool
 // bad
 com.google.util.imageTool
 com.google.util.image_tool
+```
+
+##### [强制] 包名采用反域名命名规则，至少四级
+
+一、二级包名通常是域名的反写，因为域名不会重复。
+
+如果有域名则采用域名的反写：
+
+```
+chenjianhang.com => com.chenjianhang
+abc.net => net.abc
+```
+
+如果没有域名：
+
+一级包名为域名后缀，如com、net、cn、me等。
+公司的项目通常是com，个人的项目可以选择me，团队的项目可以采用team，其他的也可以。
+
+二级包名是公司、组织、机构、团队或者个人的名称。
+
+
+三级包名是项目名。
+
+四级包名为模块名或层级名。
+
+```
+com.baidu.tieba.view
+
+com.sina.weibo.xxx
 ```
 
 ### 2.4 注释
@@ -571,3 +602,15 @@ new Foo().foo();
 ##### [强制] 禁止重载Object.finalize
 
 如果你觉得非要重载Object.finalize不可，请先仔细阅读和理解《Effective Java》 第7条：“Avoid Finalizers”，然后不要使用它。
+
+## 编译器相关
+
+### 警告
+
+##### [建议] 认真对待代码中的警告，并尽可能处理掉
+
+
+##### [强制] 过时的方法和类应当不再使用，用新的方法替换
+
+@Deprecated
+

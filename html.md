@@ -16,6 +16,7 @@
 
 
 ###  格式
+
 每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进。
 独立元素的样式（as CSS allows elements to assume a different role per display property), 将块元素、列表元素或表格元素都放在新行。
  
@@ -398,6 +399,7 @@ HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以
     <p>Sic.</p>
   </body>
 </html>
+
 <!-- 推荐 -->
 <!DOCTYPE html>
 <title>Saving money, saving bytes</title>
