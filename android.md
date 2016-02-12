@@ -17,12 +17,19 @@ Android 是用 Java 开发的，Java 的编程规范同样对 Android 有效。
 安卓常用的模块名：
 
 activity：存放所有Activity类 
+
 adapter：存放所有的适配器类 
+
 service：存放所有Service类 
+
 view：存放自定义控件 
+
 util：存放工具类 
+
 fragment
+
 base
+
 model：实体类（bean、domain均可，个人喜好）
 
 db：数据库操作
@@ -31,6 +38,10 @@ view（或者.ui）自定义的View类等
 
 broadcast：Broadcast服务类
 
+```
+SplashActivity // 闪屏界面
+MainActivity // 主界面
+```
 
 #### 类命名规范
 
@@ -129,12 +140,13 @@ ImageButton imgBtn
 
 ```
  
-应用图标icon的大小
-drawable-ldpi：32*32
-drawable-mdpi：48*48
-drawable-hdpi：72*72
-drawable-xhdpi：96*96
-drawable-xxhdpi：144*144
+##### [建议] 应用图标的大小要合理
+
+* drawable-ldpi：32*32
+* drawable-mdpi：48*48
+* drawable-hdpi：72*72
+* drawable-xhdpi：96*96
+* drawable-xxhdpi：144*144
  
 #### xml布局文件
 
@@ -153,6 +165,8 @@ res/layout目录下文件：
 res/drawable目录下文件：
  
 统一用小写加下划线“_”组合命名，同上，每个资源文件最好加个前缀以便区分，如：btn_submit_default.png，btn_ submit _pressed.png，btn_ submit.xml;
+
+
 
 ## 调试
 
@@ -178,6 +192,8 @@ res/drawable目录下文件：
 
 ##### [建议] 如果是控件上面显示的文本，放在strings.xml资源文件中
 
+##### [建议] 除了注释外，Java 代码中不出现中文
+
 ### color.xml
 
 颜色值的命名：  color_description  以color为前缀，全部小写，下划线分隔。description既可以是该颜色值使用的功能描述，也可以是该颜色值的英文描述，也可以是具体的颜色值，例如：
@@ -189,6 +205,11 @@ res/drawable目录下文件：
 ```
 因为grey可能有很多等级，有时候需要不同等级的灰色，没有那么多英文名可以区分，所以名字中可以直接使用颜色值
 <color name=”color_button_pressed”>#4c4c4c</color> 根据功能定义description，表示该颜色用于按钮被按下
+
+### styles.xml
+
+将layout中不断重现的style提炼出通用的style通用组件，放到styles.xml中
+
 
 ### 动画文件
 
@@ -260,7 +281,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
+### AndroidManifest.xml
 
+##### [建议] activity 按照字典序排序
 ## API
 
 ### Handler

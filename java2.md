@@ -144,9 +144,7 @@ final String DATABASE_NAME = "foo";
 ## 常见缩写
 
 ```
-str // string
-ic // icon
-cl // color
+anim // animation
 avg // average
 bg // background
 buf // buffer
@@ -158,6 +156,7 @@ esc // escape
 inc // increment
 info // infomation
 init // initial
+ic // icon
 img // image
 len // length
 lib // library

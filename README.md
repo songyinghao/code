@@ -9,6 +9,7 @@
 * [HTML编程规范](html.md)
 * [CSS编程规范](css.md)
 * [Javascript编程规范](javascript.md)
+* [JQuery编码规范](jquery.md)
 * [Java编程规范](java.md)
 * [Java编程规范2](java2.md)
 * [Android编程规范](android.md)

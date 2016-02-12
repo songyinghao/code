@@ -405,4 +405,8 @@ HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以
 <title>Saving money, saving bytes</title>
 <p>Qed.
 ```
- 
+
+## 未整理
+
+##### [强制] table 元素必须包含 thead 和 tbody 元素
+

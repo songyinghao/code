@@ -1,9 +1,10 @@
 [TOC]
 
-# Javascript编程规范
+# Javascript 编码规范
 
 ## 前言
 
+Javascript 编程必须遵守[通用编程规范](common.md)和本编程规范。
 
 ## 1 代码风格
 
@@ -11,6 +12,12 @@
 
 ##### [推荐] Javascript文件使用无 BOM 的 UTF-8 编码
 
+##### [建议] Javascript文件格式 `.js`，压缩文件格式 `.min.js`
+
+```
+jquery.js
+jquery.min.js
+```
 
 ### 1.2 结构
 
@@ -43,6 +50,11 @@ foo = 1;
 ```
 
 ##### [强制] 每条语句必须以分号结尾
+
+```
+var funcName = function () {
+};
+```
 
 ##### [强制] 函数定义结束不允许添加分号
 
@@ -88,5 +100,30 @@ var name = "MyName";
 **大文件可以压缩处理**
 
 [在线JS/CSS/HTML压缩](http://tool.oschina.net/jscompress)
-
 (采用YUI Compressor实现)
+
+##### [建议] setTimeout() 第一个参数不建议使用字符串
+
+为了安全
+
+```
+function foo {...}
+
+// good
+setTimeout(foo, 1000);
+
+// bad
+setTimeout('foo()', 1000);
+```
+
+##### [可选] 适当情况下使用 `&&` 使代码简洁
+
+```
+// good
+if (something()) { 
+	other();
+}
+
+// good
+something() && other();
+```
