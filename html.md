@@ -1,29 +1,87 @@
-[TOC]
+ [TOC]
+
+[1 前言](#user-content-1-前言)
+ 
+[2 代码风格](#user-content-2-代码风格)
+ 
+　　[2.1 文件](#user-content-21-文件)
+
+　　[2.2 结构](#user-content-22-结构)
+ 
+　　　　[2.2.1 缩进](#user-content-221-缩进)
+ 
+　　　　[2.2.2 空格](#user-content-222-空格)
+ 
+　　　　[2.2.3 空行](#user-content-223-空行)
+ 
+　　　　[2.2.4 换行](#user-content-224-换行)
+ 
+　　[2.3 命名](#user-content-22-命名)
+ 
+　　[2.4 注释](#user-content-23-注释)
+ 
+[3 语言特性](#user-content-3-语言特性)
+ 
+　　[3.1 DOCTYPE](#user-content-31-DOCTYPE)
+ 
+　　[3.2 元素](#user-content-32-元素)
+
+　　[3.3 属性](#user-content-32-属性)
+
+[4 常见元素](#user-content-4-常见元素)
+
+　　[4.1 html](#user-content-41-html)
+
+　　[4.2 head](#user-content-42-head)
+
+　　[4.3 title](#user-content-43-title)
+
+　　[4.4 meta](#user-content-44-meta)
+
+　　[4.5 link](#user-content-45-link)
+
+　　[4.6 script](#user-content-46-script)
+
+　　[4.7 img](#user-content-47-img)
+
+　　[4.8 table](#user-content-48-table)
+
+[5 其他](#user-content-5-其他)
+
+　　[5.1 代码有效性](#user-content-51-代码有效性)
 
 # HTML编程规范
 
-## 前言
+## 1 前言
 
 无
 
-## 代码风格
+## 2 代码风格
 
 代码风格注重的是代码的“美观”。“美观”的代码可读性高，并且可以避免一点的错误。
 
-### 缩进
+### 2.1 文件
+
+##### [建议] 用不带BOM头的 UTF-8编码
+
+用没有字节顺序标记的UTF-8编码格式进行编写。
+
+在HTML模板和文件中指定编码 `<meta charset="utf-8"> `. 不需要制定样式表的编码，它默认为UTF-8.
+
+### 2.2 结构
+
+#### 2.2.1 缩进
 
 ##### [强制] 每次缩进 4 个空格，不允许使用 2 个空格过 tab 字符
 
 
-###  格式
-
 每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进。
 独立元素的样式（as CSS allows elements to assume a different role per display property), 将块元素、列表元素或表格元素都放在新行。
- 
+
 另外，需要缩进块元素、列表元素或表格元素的子元素。
- 
+
 （如果出现了列表项左右空文本节点问题，可以试着将所有的 li 元素都放在一行。 A linter is encouraged to throw a warning instead of an error.)
- 
+
 ```html
 <blockquote>
   <p><em>Space</em>, the final frontier.</p>
@@ -35,7 +93,7 @@
 </ul>
 <table>
     <thead>
-	<tr>
+    <tr>
       <th scope="col">Income
       <th scope="col">Taxes
   <tbody>
@@ -44,14 +102,11 @@
       <td>$ 4.50
 </table>
 ```
- 
 
- 
-### 换行
 
-##### [建议] 每行代码不超过 120 个字符
 
-### 空格
+
+#### 2.2.2 空格
 
 ##### [强制] 元素属性中的 `=` 左右不能出现空格
 
@@ -64,23 +119,35 @@
 <p class= "foo">...</p>
 <p class = "foo">...</p>
 ```
-## 编码
 
-##### [建议] 用不带BOM头的 UTF-8编码。
+#### 2.2.3 换行
 
-用没有字节顺序标记的UTF-8编码格式进行编写。
- 
-在HTML模板和文件中指定编码 `<meta charset="utf-8"> `. 不需要制定样式表的编码，它默认为UTF-8.
+##### [建议] 每行代码不超过 120 个字符
 
-## DOCTYPE
 
-###### [强制] 使用HTML5标准，且DOCTYPE大写
+### 2.3  注释
+
+##### [建议] 在模块的开始和结束位置添加模块开始/结束注释
+
+这样做可以使模块分界清晰，便于维护。
+
+```html
+<!-- XX模块开始 -->
+
+<!-- XX模块结束 -->
+```
+
+## 3 语言特性
+
+### 3.1 DOCTYPE
+
+##### [强制] 使用HTML5标准，且DOCTYPE大写
 
 ```
 <!DOCTYPE html>
 ```
 
-## 元素（标签）
+### 3.2 元素（标签）
 
 ##### [强制] 元素名必须小写 
 
@@ -148,11 +215,11 @@ TODO 有空再补充
 
 /* bad */
 <div class="foo">
-	<img src="xxx.jpg">
+    <img src="xxx.jpg">
 </div>
 ```
 
-### 属性
+### 3.3 属性
 
 ##### [强制] 属性必须小写
 
@@ -189,9 +256,35 @@ TODO 有空再补充
 
 ##### [建议] 属性值必须小写（除了文本和 CDATA ）
 
-## 常见的元素
 
-### html
+
+
+
+### 协议
+
+嵌入式资源书写省略协议头
+省略图像、媒体文件、样式表和脚本等URL协议头部声明 ( http: , https: )。如果不是这两个声明的URL则不省略。
+
+省略协议声明，使URL成相对地址，防止内容混淆问题和导致小文件重复下载。
+```html
+<!-- 不推荐 -->
+<script src="http://www.google.com/js/gweb/analytics/autotrack.js"></script>
+<!-- 推荐 -->
+<script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+/* 不推荐 */
+.example {
+  background: url(http://www.google.com/images/example);
+}
+/* 推荐 */
+.example {
+  background: url(//www.google.com/images/example);
+}
+```
+
+
+## 4 常见元素
+
+### 4.1 html
 
 ##### [建议] 为 html 元素添加 lang 属性
 
@@ -201,24 +294,24 @@ TODO 有空再补充
 <html lang="zh-CN">
 ```
 
-### head
+### 4.2 head
 
 ##### [建议] head元素各子元素的顺序
 
 
-### title
+### 4.3 title
 
 ##### [强制] title 元素必不可少
 
-### meta
+### 4.4 meta
 
 ##### [强制] 使用 `<meta charset="">` 来定义页面编码
 
 ```
 <meta charset="utf-8">
 ```
- 
-### link
+
+### 4.5 link
 
 ##### [强制] 使用 link 引用外部 css 文件时，必须加 `rel="stylesheet"`
 
@@ -233,7 +326,7 @@ TODO 有空再补充
 ##### [强制] 使用 link 引用外部 css 文件时，不允许加 `type="text/css"`
 
 
- 
+
 HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器也是支持的。
 
 ```
@@ -258,7 +351,7 @@ HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器
 <link href="long-path/foo.css" rel="stylesheet" >
 ```
 
-### script
+### 4.6 script
 
 ##### [强制] 使用script元素引用外部 javascript 文件时，不允许加 `type="text/javascript"` 
 
@@ -272,57 +365,44 @@ HTML5默认 script 元素的 type 为 `text/javascript` 类型，所以没必要
 <script type="text/javascript" src="foo.js"></script>
 ```
 
-### img
+### 4.7 img
 
 
+### 4.8 table
 
+##### [强制] 除非必要，否则不要使用 `table` 元素来布局
 
+##### [强制] table 元素必须包含 thead 和 tbody 元素
 
-### 协议
+如果不需要标题，thead 可以不写。
 
-嵌入式资源书写省略协议头
-省略图像、媒体文件、样式表和脚本等URL协议头部声明 ( http: , https: )。如果不是这两个声明的URL则不省略。
- 
-省略协议声明，使URL成相对地址，防止内容混淆问题和导致小文件重复下载。
-```html
-<!-- 不推荐 -->
-<script src="http://www.google.com/js/gweb/analytics/autotrack.js"></script>
-<!-- 推荐 -->
-<script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
-/* 不推荐 */
-.example {
-  background: url(http://www.google.com/images/example);
-}
-/* 推荐 */
-.example {
-  background: url(//www.google.com/images/example);
-}
-```
+## 5 其他
 
+### 5.1 代码有效性
 
- 
- 
-###  注释
-必要的注释
+###  HTML代码有效性
 
-我常常这么做：
-```html
-<!-- XX模块开始 -->
+##### [建议] 尽量使用有效的HTML代码
 
-<!-- XX模块结束 -->
-```
+比如元素的闭合、必要的元素等等。
+
+编写有效的HTML代码，否则很难达到性能上的提升。
+
+用类似 [W3C HTML validator](http://validator.w3.org/)  这样的工具来进行测试。
+
+HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以正确使用。
 
 ### TODO
- 
+
 ##### [建议] 用 TODO 标记代办事项和正活动的条目
 
 说明：
 只用 TODO 来强调代办事项， 不要用其他的常见格式，例如 @@ 。
- 
+
 附加联系人（用户名或电子邮件列表），用括号括起来，例如 TODO(contact) 。
- 
+
 可在冒号之后附加活动条目说明等，例如 TODO: 活动条目说明 。
- 
+
 ```html
 {# TODO(cha.jn): 重新置中 #}
 <center>Test</center>
@@ -332,62 +412,54 @@ HTML5默认 script 元素的 type 为 `text/javascript` 类型，所以没必要
   <li>Oranges</li>
 </ul>
 ```
- 
 
- 
-###  HTML代码有效性
- 
-尽量使用有效的HTML代码。比如元素的闭合、必要的元素等等。
-编写有效的HTML代码，否则很难达到性能上的提升。
- 
-用类似这样的工具 W3C HTML validator 来进行测试。
- 
-HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以正确使用。
- 
+
+
 
 ###  多媒体后备方案
 
-为多媒体提供备选内容。
+##### [建议] 为多媒体提供备选内容
+
 对于多媒体，如图像，视频，通过 canvas 读取的动画元素，确保提供备选方案。 对于图像使用有意义的备选文案（ alt ） 对于视频和音频使用有效的副本和文案说明。
- 
+
 提供备选内容是很重要的，原因：给盲人用户以一些提示性的文字，用 @alt 告诉他这图像是关于什么的，给可能没理解视频或音频的内容的用户以提示。
- 
+
 （图像的 alt 属性会产生冗余，如果使用图像只是为了不能立即用CSS而装饰的 ，就不需要用备选文案了，可以写 alt="" 。）
- 
- 
+
+
 ###  关注点分离
 
 将表现和行为分开。
 严格保持结构 （标记），表现 （样式），和行为 （脚本）分离, 并尽量让这三者之间的交互保持最低限度。
- 
-确保文档和模板只包含HTML结构， 把所有表现都放到样式表里，把所有行为都放到脚本里。
- 
-此外，尽量使脚本和样式表在文档与模板中有最小接触面积，即减少外链。
- 
-将表现和行为分开维护是很重要滴，因为更改HTML文档结构和模板会比更新样式表和脚本更花费成本。
- 
 
- 
- 
+确保文档和模板只包含HTML结构， 把所有表现都放到样式表里，把所有行为都放到脚本里。
+
+此外，尽量使脚本和样式表在文档与模板中有最小接触面积，即减少外链。
+
+将表现和行为分开维护是很重要滴，因为更改HTML文档结构和模板会比更新样式表和脚本更花费成本。
+
+
+
+
 ### 实体引用
 
 不要用实体引用。
 不需要使用类似 &mdash; 、 &rdquo; 和 &#x263a; 等的实体引用, 假定团队之间所用的文件和编辑器是同一编码（UTF-8）。
- 
+
 在HTML文档中具有特殊含义的字符（例如 < 和 & )为例外， 噢对了，还有 “不可见” 字符 （例如no-break空格）。
- 
+
 <!-- 不推荐 -->
 欧元货币符号是 `&ldquo;&eur;&rdquo;`。
 <!-- 推荐 -->
 欧元货币符号是 “€”。
- 
+
 ### 可选标签
 
 省略可选标签（可选）。
 出于优化文件大小和校验， 可以考虑省略可选标签，哪些是可选标签可以参考[ HTML5 specification](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission)。
- 
+
 （这种方法可能需要更精准的规范来制定，众多的开发者对此的观点也都不同。考虑到一致性和简洁的原因，省略所有可选标记是有必要的。）
- 
+
 ```html
 <!-- 不推荐 -->
 <!DOCTYPE html>
@@ -405,8 +477,3 @@ HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以
 <title>Saving money, saving bytes</title>
 <p>Qed.
 ```
-
-## 未整理
-
-##### [强制] table 元素必须包含 thead 和 tbody 元素
-
