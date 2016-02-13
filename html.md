@@ -12,13 +12,11 @@
  
 　　　　[2.2.2 空格](#user-content-222-空格)
  
-　　　　[2.2.3 空行](#user-content-223-空行)
+　　　　[2.2.3 换行](#user-content-223-换行)
  
-　　　　[2.2.4 换行](#user-content-224-换行)
+　　[2.3 命名](#user-content-23-命名)
  
-　　[2.3 命名](#user-content-22-命名)
- 
-　　[2.4 注释](#user-content-23-注释)
+　　[2.4 注释](#user-content-24-注释)
  
 [3 语言特性](#user-content-3-语言特性)
  
@@ -26,7 +24,7 @@
  
 　　[3.2 元素](#user-content-32-元素)
 
-　　[3.3 属性](#user-content-32-属性)
+　　[3.3 属性](#user-content-33-属性)
 
 [4 常见元素](#user-content-4-常见元素)
 
@@ -152,7 +150,7 @@
 <!DOCTYPE html>
 ```
 
-### 3.2 元素（标签）
+### 3.2 元素
 
 ##### [强制] 元素名必须小写 
 
