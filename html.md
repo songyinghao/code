@@ -1,4 +1,4 @@
- [TOC]
+[TOC]
 
 [1 前言](#user-content-1-前言)
  
@@ -58,8 +58,6 @@
 
 ## 2 代码风格
 
-代码风格注重的是代码的“美观”。“美观”的代码可读性高，并且可以避免一点的错误。
-
 ### 2.1 文件
 
 ##### [建议] 用不带BOM头的 UTF-8编码
@@ -75,31 +73,38 @@
 ##### [强制] 每次缩进 4 个空格，不允许使用 2 个空格过 tab 字符
 
 
-每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进。
-独立元素的样式（as CSS allows elements to assume a different role per display property), 将块元素、列表元素或表格元素都放在新行。
+##### [强制] 每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进
+
+将块元素、列表元素或表格元素都放在新行。
 
 另外，需要缩进块元素、列表元素或表格元素的子元素。
 
-（如果出现了列表项左右空文本节点问题，可以试着将所有的 li 元素都放在一行。 A linter is encouraged to throw a warning instead of an error.)
+（如果出现了列表项左右空文本节点问题，可以试着将所有的 li 元素都放在一行。 )
 
 ```html
 <blockquote>
-  <p><em>Space</em>, the final frontier.</p>
+	<p><em>Space</em>, the final frontier.</p>
 </blockquote>
+
 <ul>
-  <li>Moe
-  <li>Larry
-  <li>Curly
+	<li>一</li>
+	<li>二</li>
+	<li>三</li>
 </ul>
+
 <table>
-    <thead>
-    <tr>
-      <th scope="col">Income
-      <th scope="col">Taxes
-  <tbody>
-    <tr>
-      <td>$ 5.00
-      <td>$ 4.50
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>张三</td>
+			<td>16</td>
+		</tr>
+	</tbody>
 </table>
 ```
 
@@ -111,10 +116,10 @@
 ##### [强制] 元素属性中的 `=` 左右不能出现空格
 
 ```
-/* good */
+<!-- good -->
 <p class="foo">...</p>
 
-/* bad */
+<!-- bad -->
 <p class ="foo">...</p>
 <p class= "foo">...</p>
 <p class = "foo">...</p>
@@ -152,26 +157,26 @@
 ##### [强制] 元素名必须小写 
 
 ```
-/* good */
+<!-- good -->
 <div></div>
 
-/* bad */
+<!-- bad -->
 <DIV></DIV>
 ```
 
-##### [强制] 闭合标签必须闭合
+##### [强制] 不要省略可选的结束标签（closing tag）
 
 ```
-/* good */
+<!-- good -->
 <p>这是一段文本</p>
 
-/* bad */
+<!-- bad -->
 <p>这是一段文本
 ```
 
-##### [强制] 无内容元素（Void elements）不允许自闭合
+##### [强制] 不要在自闭合元素（Void elements）尾部添加斜线
 
-常见的无内容元素：
+常见的自闭合元素：
 ```
 <br> <hr> <img> <input> <link> <meta>
 ```
@@ -184,10 +189,10 @@
 示例：
 
 ```
-/* good */
+<!-- good -->
 <img src="xxx.jpg">
 
-/* bad */
+<!-- bad -->
 <img src="xxx.jpg" />
 ```
 
@@ -205,15 +210,13 @@ TODO 有空再补充
 
 如center、u 等等。
 
-##### [建议] 除了显示表格外，尽可能避免使用表格来布局
-
 ##### [建议] 减少不必要的嵌套
 
 ```
-/* good */
+<!-- good -->
 <img class="foo" src="xxx.jpg">
 
-/* bad */
+<!-- bad -->
 <div class="foo">
     <img src="xxx.jpg">
 </div>
@@ -224,31 +227,33 @@ TODO 有空再补充
 ##### [强制] 属性必须小写
 
 ```
-/* good */
+<!-- good -->
 <img src="xxx.jpg">
+<div onclick="foo()"></div>
 
-/* bad */
-<img src="xxx.jpg">
+<!-- bad -->
+<img SRC="xxx.jpg">
+<div onClick="foo()"></div>
 ```
 
 ##### [建议] 自定义属性以 `data-` 开头
 ```
-/* good */
+<!-- good -->
 <img class="post-image" src="default.jpg" data-original="foo.png">
 
-/* bad */
+<!-- bad -->
 <img class="post-image" src="default.jpg" original-image="foo.png">
 ```
 
 ##### [强制] 属性值必须用双引号包围
 
-不允许使用单引号，不允许不加引号
+不允许使用单引号，不允许不加引号。
 
 ```
-/* good */
+<!-- good -->
 <img src="xxx.jpg">
 
-/* bad */
+<!-- bad -->
 <img src='xxx.jpg'>
 <img src='xxx.jpg>
 ```
@@ -256,30 +261,42 @@ TODO 有空再补充
 
 ##### [建议] 属性值必须小写（除了文本和 CDATA ）
 
-
-
-
-
-### 协议
-
-嵌入式资源书写省略协议头
-省略图像、媒体文件、样式表和脚本等URL协议头部声明 ( http: , https: )。如果不是这两个声明的URL则不省略。
-
-省略协议声明，使URL成相对地址，防止内容混淆问题和导致小文件重复下载。
-```html
-<!-- 不推荐 -->
-<script src="http://www.google.com/js/gweb/analytics/autotrack.js"></script>
-<!-- 推荐 -->
-<script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
-/* 不推荐 */
-.example {
-  background: url(http://www.google.com/images/example);
-}
-/* 推荐 */
-.example {
-  background: url(//www.google.com/images/example);
-}
 ```
+<!-- good -->
+<a href="" target="_blank">百度一下</a>
+
+<!-- bad -->
+<a href="" target="_BLANK">百度一下</a>
+```
+
+##### [建议] 布尔类型的属性不添加属性值 
+ 
+```
+<!-- good -->
+<input type="text" disabled>
+ 
+<input type="checkbox" checked>
+ 
+<select>
+	<option selected>1</option>
+</select>
+
+<!-- bad -->
+<input type="text" disabled="true">
+```
+
+##### [建议] 属性应当按照以下给出的顺序依次排列
+
+1. class
+2. id, name
+3. data-*
+4. src, for, type, href
+5. title, alt
+6. aria-*, role
+
+class 用于标识高度可复用组件，因此应该排在首位。
+
+id 用于标识具体组件，应当谨慎使用（例如，页面内的书签），因此排在第二位。
 
 
 ## 4 常见元素
@@ -288,16 +305,24 @@ TODO 有空再补充
 
 ##### [建议] 为 html 元素添加 lang 属性
 
-有一些特殊的作用，比如方便翻译工具自动翻译等等。
+为文档设置正确的语言。
 
+这将有助于语音合成工具确定其所应该采用的发音，有助于翻译工具自动翻译等等。
+
+如果是中文，lang 属性值为 `zh-CN`。
 ```
 <html lang="zh-CN">
 ```
 
 ### 4.2 head
 
-##### [建议] head元素各子元素的顺序
+##### [建议] head 元素各子元素按顺序编写
 
+1. meta
+2. title
+3. link
+4. script
+5. style
 
 ### 4.3 title
 
@@ -311,15 +336,24 @@ TODO 有空再补充
 <meta charset="utf-8">
 ```
 
+##### [建议] 启用 IE 兼容模式
+
+IE 支持通过特定的 <meta> 标签来确定绘制当前页面所应该采用的 IE 版本。除非有强烈的特殊需求，否则最好是设置为 edge mode，从而通知 IE 采用其所支持的最新的模式。
+
+```
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+```
+
 ### 4.5 link
 
 ##### [强制] 使用 link 引用外部 css 文件时，必须加 `rel="stylesheet"`
 
+
 ```
-/* good */
+<!-- good -->
 <link rel="stylesheet" href="foo.css">
 
-/* bad */
+<!-- bad -->
 <link rel="stylesheet" href="foo.css">
 ```
 
@@ -330,10 +364,10 @@ TODO 有空再补充
 HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器也是支持的。
 
 ```
-/* good */
+<!-- good -->
 <link rel="stylesheet" href="foo.css">
 
-/* bad */
+<!-- bad -->
 <link rel="stylesheet" type="text/css" href="foo.css">
 ```
 
@@ -342,11 +376,11 @@ HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器
 仅仅是为了对齐，看起来美观而已。
 
 ```
-/* good */
+<!-- good -->
 <link rel="stylesheet" href="foo.css">
 <link rel="stylesheet" href="long-path/foo.css">
 
-/* bad */
+<!-- bad -->
 <link href="foo.css" rel="stylesheet">
 <link href="long-path/foo.css" rel="stylesheet" >
 ```
@@ -358,10 +392,10 @@ HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器
 HTML5默认 script 元素的 type 为 `text/javascript` 类型，所以没必要指定。即便是老浏览器也是支持的。
 
 ```
-/* good */
+<!-- good -->
 <script src="foo.js"></script>
 
-/* bad */
+<!-- bad -->
 <script type="text/javascript" src="foo.js"></script>
 ```
 
@@ -371,6 +405,8 @@ HTML5默认 script 元素的 type 为 `text/javascript` 类型，所以没必要
 ### 4.8 table
 
 ##### [强制] 除非必要，否则不要使用 `table` 元素来布局
+
+除了显示表格数据外，尽可能避免使用表格来布局。
 
 ##### [强制] table 元素必须包含 thead 和 tbody 元素
 
@@ -439,6 +475,29 @@ HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以
 将表现和行为分开维护是很重要滴，因为更改HTML文档结构和模板会比更新样式表和脚本更花费成本。
 
 
+### 协议
+
+##### [建议] 嵌入式资源书写省略协议头
+
+省略图像、媒体文件、样式表和脚本等URL协议头部声明 ( http: , https: )。如果不是这两个声明的URL则不省略。
+
+省略协议声明，使URL成相对地址，防止内容混淆问题和导致小文件重复下载。
+
+```html
+<!-- 不推荐 -->
+<script src="http://www.google.com/js/gweb/analytics/autotrack.js"></script>
+<!-- 推荐 -->
+<script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+
+/* 不推荐 */
+.example {
+  background: url(http://www.google.com/images/example);
+}
+/* 推荐 */
+.example {
+  background: url(//www.google.com/images/example);
+}
+```
 
 
 ### 实体引用
@@ -452,28 +511,3 @@ HTML代码有效性是重要的质量衡量标准，并可确保HTML代码可以
 欧元货币符号是 `&ldquo;&eur;&rdquo;`。
 <!-- 推荐 -->
 欧元货币符号是 “€”。
-
-### 可选标签
-
-省略可选标签（可选）。
-出于优化文件大小和校验， 可以考虑省略可选标签，哪些是可选标签可以参考[ HTML5 specification](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission)。
-
-（这种方法可能需要更精准的规范来制定，众多的开发者对此的观点也都不同。考虑到一致性和简洁的原因，省略所有可选标记是有必要的。）
-
-```html
-<!-- 不推荐 -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Spending money, spending bytes</title>
-  </head>
-  <body>
-    <p>Sic.</p>
-  </body>
-</html>
-
-<!-- 推荐 -->
-<!DOCTYPE html>
-<title>Saving money, saving bytes</title>
-<p>Qed.
-```

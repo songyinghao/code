@@ -67,6 +67,8 @@
 
 ##### [强制] 选择器和左大括号之间隔一个空格
 
+在每个声明块的左花括号前添加一个空格。
+
 ```
 /* good */
 .foo {
@@ -77,7 +79,9 @@
 }
 ```
 
-##### [强制] 属性名后面的冒号和值之间加一个空格（属性名和冒号之间不能加空格）
+##### [强制] 属性名后面的冒号和值之间加一个空格
+
+注意属性名和冒号之间不能加空格。
 
 ```
 /* good */
@@ -89,6 +93,9 @@
 .foo {
     color:#f00;
 }
+.foo {
+	color : #fff;
+}
 ```
 
 ##### [强制] 当一个属性有多个值的时候， `,` 后面必须跟一个空格
@@ -96,12 +103,12 @@
 ```
 /* good */
 .foo {
-    font-family: 楷体, 微软雅黑;
+    font-family: "楷体", "微软雅黑";
 }
 
 /* bad */
 .foo {
-    font-family: 楷体,微软雅黑;
+    font-family: "楷体","微软雅黑";
 }
 ```
 
@@ -119,7 +126,7 @@ ul>li {
 
 #### 2.2.3 空行
 
-##### [建议] 两个规则之间隔一行
+##### [可选] 两个规则之间隔一行
 
 ```
 /* good */
@@ -154,6 +161,8 @@ ul>li {
 
 ##### [强制] 每个声明独立一行
 
+除了可读性外，还可以获得更准确的错误报告。
+
 ```
 /* good */
 .foo {
@@ -165,6 +174,19 @@ ul>li {
 .foo {
 	color: #f00; font-size: 18px;
 }
+```
+
+##### [强制] 声明块的右花括号应当单独成行
+
+```
+/* good */
+.foo {
+	color: #fff;
+}
+
+/* bad */
+.foo {
+	color: #fff; }
 ```
 
 #### 2.2.5 顺序
@@ -191,15 +213,12 @@ ul>li {
 ##### [建议] 声明按照功能排序
 
 声明顺序：
-1.位置属性(position, top, right, z-index, display, float等)
-2.大小(width, height, padding, margin)
-3.文字系列(font, line-height, letter-spacing, color- text-align等)
-4.背景(background, border等)
-5.其他(animation, transition等)
+1. 位置属性(position, top, right, z-index, display, float等)
+2. 大小(width, height, padding, margin)
+3. 文字系列(font, line-height, letter-spacing, color- text-align等)
+4. 背景(background, border等)
+5. 其他(animation, transition等)
 
-谷歌推荐的做法，本人不推荐这么做：
-
-谷歌推荐依字母顺序进行声明，很容易记住和维护。
 忽略浏览器的特定前缀排序，但多浏览器特定的某个CSS属性前缀应相对保持排序（例如-moz前缀在-webkit前面）。
 ```
 background: fuchsia;
@@ -245,7 +264,7 @@ text-indent: 2em;
 
 ###  3.1 选择器
 
-#### 3.1.1 高效率选择器
+#### 3.1.1 高效率、可维护选择器
 
 ##### [建议] 尽可能避免使用效率低的选择器
 
@@ -271,6 +290,22 @@ text-indent: 2em;
 
 /* bad */
 .person .info .name {}
+```
+
+##### [建议] 避免样式污染
+
+层级为 1 的选择器容易造成样式污染，使用时需谨慎。
+
+一般使用两个层级的选择器，前一个选择器名是页面唯一的模块名，后一个只要保证在模块内唯一就可以了。
+
+```
+/* good */
+.header .username {
+}
+
+/* bad */
+.username {
+}
 ```
 
 ##### [建议] 避免使用类型选择器
@@ -415,6 +450,8 @@ div .error {}
 
 ##### [强制] 所有声明都要用分号结尾
 
+尤其是最后一条声明语句后面的分号，如果不写，你的代码可能更易出错。
+
 ```
 /* good */
 .foo {
@@ -424,6 +461,10 @@ div .error {}
 /* bad */
 .foo {
     color: #f00
+}
+.foo {
+	color: #fff;
+	font-size: 18px
 }
 ```
 
@@ -465,15 +506,32 @@ padding: 0px;
 ```
 /* good */
 font-size: .8em;
+padding-left: -0.5px;
 
 /* bad */
 font-size: 0.8em;
+padding-left: -.5px;
 ```
 
 ##### [建议] 十六进制尽可能使用3个字符。
 
 ```
-color: #ebc;
+/* good */
+color: #ffffff;
+
+/* bad */
+color: fff;
+```
+
+##### [强制] 十六进制值应该全部小写
+
+```
+/* good */
+color: #fc0;
+
+/* bad */
+color: #FC0;
+color: #Fc0;
 ```
 
 ##### [建议] 尽可能避免使用hacks。
@@ -493,12 +551,12 @@ background: url(bg.png);
 ```
 /* good */
 .foo {
-    font-family:Cambria, "Hoefler Text", serif;
+    font-family: "微软雅黑", "Hoefler Text", serif;
 }
 
 /* bad */
 .foo {
-    font-family:Cambria, Hoefler Text, serif;
+    font-family: 微软雅黑, Hoefler Text, serif;
 }
 ```
 ##### [强制] 颜色采用 16 进制代码而不是颜色的名称
