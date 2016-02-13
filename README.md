@@ -14,6 +14,7 @@
 * [Java编程规范2](java2.md)
 * [Android编程规范](android.md)
 * [PHP编程规范](php.md)
+* [MySQL编码规范](mysql.md)
 
 注意：
 
