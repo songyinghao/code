@@ -25,9 +25,9 @@ jquery.lazyload.js
 jquery.posfixed.js
 ```
 
-##### [建议] 针对新的JQuery版本开发
+##### [建议] 针对新的 jQuery 版本开发
 
-
+在文件注释中注明适用的 jQuery 版本。
 
 ##### [强制] 使用闭包
 
@@ -162,6 +162,13 @@ $('#foo').addClass('error');
  
 ##### [建议] 开发效率与执行效率的合理选择
 
+适当地使用原生 JavaScript，而不是全都用 JQuery实现。
+
+##### [建议] 使用高效率的选择器
+
+
+* 尽量用 ID 选择器
+* 
 ##### [建议] 使用对象来传递参数
 
 ```
@@ -179,6 +186,19 @@ $myLink.attr({
 ##### [建议] 使用 on() 方法绑定事件
 
 官方推荐这么做
+
+##### [强制] 不要使用摒弃了的方法
+
+不使用摒弃了的方法，如 `live`。
+
+推荐使用新的方法。
+
+如 JQuery 从 1.7 版本开始将 bind()、live() 和 delegate() 方法合并成了 on() 方法。
+
+##### [可选] 给插件名加个特殊前缀
+
+jQuery 插件太多，防止命名冲突
+
 
 ##### [建议] 使用 CDN
 
@@ -201,4 +221,64 @@ http://libs.baidu.com/jquery/2.0.3/jquery.min.js
 
 <script type="text/javascript">window.jQuery||document.write('<scripttype="text/javascript"src="<?phpechoget_template_directory_uri();?>/jquery.min.js">\x3C/script>')</script>
 
-6、推荐使用国内CDN公共库，速度更快，稳定性更高。
+推荐使用国内CDN公共库，速度更快，稳定性更高。
+
+##### [建议] 尽可能使用较新的版本
+
+如果需要兼容 IE6/7/8，不要用 2.x 的版本。
+
+
+## DOM 操作
+
+##### [建议] 使用连接字符串或数组join()，然后再append()。
+
+```
+// bad
+var $myList = $("#list");
+for (var i = 0; i < 10000; i++) {
+    $myList.append("<li>"+i+"</li>");
+}
+
+// good
+var $myList = $("#list");
+var list = "";
+for (var i = 0; i < 10000; i++) {
+    list += "<li>"+i+"</li>";
+}
+$myList.html(list);
+
+// EVEN FASTER
+var array = [];
+for (var i = 0; i < 10000; i++) {
+    array[i] = "<li>"+i+"</li>";
+}
+$myList.html(array.join(''));
+```
+
+##### [强制] 将 jQuery 选择器返回的内容存进变量以便重用
+
+避免重复选择。
+
+```
+// good
+var foo = $("#myId");
+foo.css('color', '#fff');
+foo.click(function(){...});
+
+// bad
+$("#myId").css('color', '#fff');
+$("#myId").click(function(){...});
+```
+
+##### [建议] 不要在链接里面嵌参数，请使用专门的参数设置来传递
+
+```
+// good
+$.ajax({
+    url: "something.php",
+    data: { param1: test1, param2: test2 }});
+
+// bad
+$.ajax({
+    url: "something.php?param1=test1&param2=test2",....});
+```

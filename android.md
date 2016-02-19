@@ -20,27 +20,18 @@ Android 是用 Java 开发的，Java 的编程规范同样对 Android 有效。
  
 安卓常用的模块名：
 
-activity：存放所有Activity类 
+* activity：存放所有Activity类 
+* adapter：存放所有的适配器类 
+* base：基类，如BaseActivity、BaseFragment等等。
+* broadcast：Broadcast服务类
+* common：全局常量，应用配置信息。
+* db：数据库操作
+* fragment
+* model：实体类（bean、domain均可，个人喜好）
+* service：存放所有Service类 
+* util：存放工具类 
+* view：（或者.ui）存放自定义控件 
 
-adapter：存放所有的适配器类 
-
-service：存放所有Service类 
-
-view：存放自定义控件 
-
-util：存放工具类 
-
-fragment
-
-base
-
-model：实体类（bean、domain均可，个人喜好）
-
-db：数据库操作
-
-view（或者.ui）自定义的View类等
-
-broadcast：Broadcast服务类
 
 ```
 SplashActivity // 闪屏界面

@@ -47,6 +47,22 @@
 
 ##### [建议] CSS 文件采用无 BOM 的 utf-8 编码
 
+文件里面没必须指定编码，因为默认就是UTF-8。 
+
+##### [强制] 文件名由小写字母、数字、连字符（-）组成 
+
+```
+common.css
+index.css
+```
+##### [强制] 禁止在 CSS 中使用 `@import`
+
+> `@import` 引用的文件只有在引用它的那个css文件被下载、解析之后，才开始下载，这导致css解析、页面渲染延迟，可能导致页面长时间空白。
+
+##### [建议] 单个 CSS 文件避免过大
+
+建议少于 300 行。
+ 
 ### 2.2 结构
 
 #### 2.2.1 缩进
@@ -65,13 +81,17 @@
 
 #### 2.2.2 空格
 
-##### [强制] 选择器和左大括号之间隔一个空格
+##### [强制] 表示块的左大括号之前加一个空格
 
 在每个声明块的左花括号前添加一个空格。
 
 ```
 /* good */
 .foo {
+}
+
+media (max-width: 300px) {
+
 }
 
 /* bad */
@@ -195,6 +215,9 @@ ul>li {
 
 从上到下，从左到右，从外到内。
 
+同一功能模块的规则应该写在一起。
+
+
 ```
 .header {
 }
@@ -212,14 +235,64 @@ ul>li {
 
 ##### [建议] 声明按照功能排序
 
+相关的属性声明应当归为一组，便于阅读和维护。
+
+> 由于定位（positioning）可以从正常的文档流中移除元素，并且还能覆盖盒模型（box model）相关的样式，因此排在首位。盒模型排在第二位，因为它决定了组件的尺寸和位置。 
+> 其他属性只是影响组件的内部（inside）或者是不影响前两组属性，因此排在后面。
+ 
 声明顺序：
-1. 位置属性(position, top, right, z-index, display, float等)
-2. 大小(width, height, padding, margin)
-3. 文字系列(font, line-height, letter-spacing, color- text-align等)
-4. 背景(background, border等)
-5. 其他(animation, transition等)
+1. 位置属性
+
+```
+position
+top
+right
+bottom
+left
+z-index
+```
+
+2. 盒模型
+
+```
+display
+float
+width
+height
+padding
+margin
+```
+
+3. 文字样式
+
+```
+font
+line-height
+letter-spacing
+color
+text-align
+...
+```
+
+4. 背景边框
+
+```
+background
+border
+```
+
+5. 其他
+
+```
+animation
+transition
+
+opacity
+...
+```
 
 忽略浏览器的特定前缀排序，但多浏览器特定的某个CSS属性前缀应相对保持排序（例如-moz前缀在-webkit前面）。
+
 ```
 background: fuchsia;
 border: 1px solid;
@@ -231,7 +304,21 @@ text-align: center;
 text-indent: 2em;
 ```
 
+##### [强制] 媒体查询尽可能放在相关规则的附近
 
+不应该把所有的媒体查询（Media query）放在一个单一样式文件中或者放在文档底部。
+
+```
+.element { ... }
+.element-avatar { ... }
+.element-selected { ... }
+ 
+@media (min-width: 480px) {
+  .element { ...}
+  .element-avatar { ... }
+  .element-selected { ... }
+}
+```
 
 ### 2.3 命名
 
@@ -471,7 +558,11 @@ div .error {}
 
 ###  3.3 属性
 
-##### [建议] 属性尽量使用缩写
+##### [建议] 合理地使用属性缩写
+
+如果需要设置所有值，应当尽量使用简写形式的属性声明。
+
+避免为了简写滥用简写属性声明。
 
 ```
 /* good */
@@ -485,6 +576,25 @@ div .error {}
     padding-right: 10px;
     padding-bottom: 20px;
     padding-left: 10px;
+}
+```
+
+```
+/* good */
+.foo {
+	margin-bottom: 10px;
+	background-color: red;
+	background-image: url(image.jpg);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+/* bad */
+.foo {
+	margin: 0 0 10px 0;
+	background: red;
+	background: url(image.jpg);
+	border-radius: 3px 3px 0 0;
 }
 ```
 
@@ -600,3 +710,7 @@ background: url(bg.png);
 用类似 [W3C CSS validator](http://jigsaw.w3.org/css-validator/)这样的工具来进行有效性的测试。
 
 使用有效的CSS是重要的质量衡量标准，如果发现有的CSS代码没有任何效果的可以删除，确保CSS用法适当。
+
+##### [强制] 禁止使用 Expression
+
+效率原因。
