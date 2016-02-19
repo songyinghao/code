@@ -4,9 +4,35 @@
 
 ## 前言
 
+## 规范说明约定
+
+1. `${root}` 表示项目的根目录
+
+ 
 ## 项目结构
 
+### 目录命名
 
+1. 简洁。有习惯性缩写的单词 *必须(MUST)* 采用容易理解的缩写。如：源代码目录使用`src`，不使用`source`。下面是更多例子：
+    1. `img`: 图片。 *不允许(MUST NOT)* 使用`image`、`images`、`imgs`等。
+    2. `js`: javascript脚本。 *不允许(MUST NOT)* 使用`script`、`scripts`等。
+    3. `css`: 样式表。 *不允许(MUST NOT)* 使用`style`、`styles`等。
+    4. `swf`: flash。 *不允许(MUST NOT)* 使用`flash`等。
+    5. `src`: 源文件目录。 *不允许(MUST NOT)* 使用`source`等。
+    6. `dep`: 引入的第三方依赖包目录。 *不允许(MUST NOT)* 使用`lib`、`library`、`dependency`等。
+2.  *不允许(MUST NOT)* 使用复数形式。如：`imgs`、`docs`是不被允许的。
+
+### 目录划分
+
+在 {root} 下，目录结构按功能划分
+
+```
+{root}/
+	src/
+	test/
+	doc/
+	dep/
+```
 
 ## 优化
 
