@@ -11,6 +11,7 @@
 * [Android 编码规范](android.md)
 * [PHP 编码规范](php.md)
 * [MySQL 编码规范](mysql.md)
+* [REST 规范](rest.md)
 
 ## 前端开发
 
