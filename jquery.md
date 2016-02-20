@@ -10,12 +10,11 @@ JQuery 编程（JQuery插件开发等）必须遵守[Javascript 编码规范](ja
 
 ##### [建议] 合理选择版本
 
-v1.13 后的 1.x版本中不再支持IE6和IE7
+v1.13 后的 1.x 版本中不再支持 IE6 和 IE7。
 
-v2.x 版本不再支持 IE6/7/8
+v2.x 版本不再支持 IE6/7/8。
 
 ## 插件开发
-
 
 ##### [建议] JQuery 插件代码文件的推荐命名方法为：jquery.插件名.js
 
@@ -54,7 +53,6 @@ $.fn.beautify = function() {
 
 ##### [强制] 插件应该返回一个JQuery对象，以便保证插件的可链式操作
 
-
 ```
 // good
 $.fn.beautify = function() {
@@ -70,7 +68,6 @@ $.fn.beautify = function() {
 };
 
 $('#foo').beautify().show(); // 出错
-
 ```
 
 ##### [建议] 接受options参数，以便控制插件的行为

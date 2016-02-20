@@ -1,22 +1,26 @@
 [TOC]
  
-# 编程规范
+# 软件开发规范
 -------------
 
 ## 编码规范
 
 * [通用编码规范](common.md)  
-* [HTML 编码规范](html.md)
-* [CSS 编码规范](css.md)
-* [Javascript 编码规范](javascript.md)
-* [JQuery 编码规范](jquery.md)
 * [Java 编码规范](java.md)
 * [Java 编码规范2](java2.md)
 * [Android 编码规范](android.md)
 * [PHP 编码规范](php.md)
 * [MySQL 编码规范](mysql.md)
 
-## 开发规范
+## 前端开发
+
+* [前端开发规范](web.md)
+* [HTML 编码规范](html.md)
+* [CSS 编码规范](css.md)
+* [Javascript 编码规范](javascript.md)
+* [JQuery 编码规范](jquery.md)
+
+## 软件工程
 
 * [版本控制规范](version.md)
 * [GIT 使用规范](git.md)

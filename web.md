@@ -1,8 +1,10 @@
 [TOC]
 
-# 前端规范
+# 前端开发规范
 
 ## 前言
+
+前端开发需遵守 [html 编码规范](html.md)、[css 编码规范](css.md)、 [javascript 编码规范](javascript.md) 和本规范。
 
 ## 规范说明约定
 
@@ -24,15 +26,53 @@
 
 ### 目录划分
 
-在 {root} 下，目录结构按功能划分
+在 {root} 下，目录结构按功能划分。
+
+不允许(MUST NOT)* 将`资源类型`或`业务逻辑`划分的目录直接置于 ${root}下。
 
 ```
 {root}/
+	dist/
 	src/
 	test/
 	doc/
 	dep/
 ```
+
+业务相关的文件置于 src 目录下
+
+如果业务相关的文件太多，应该划分成多个子业务。
+
+src 目录下只允许以业务命名的文件夹和 common 文件夹，不允许以资源类型命名的文件夹。
+
+```
+src/
+	common/
+	music/
+	movie/
+		action-movie/
+		romanti-movie/
+```
+
+小型网站允许按照资源来划分目录结构
+
+```
+{root}
+	css/
+	font/
+	img/
+	js/
+	index.html
+	...
+```
+
+业务目录的划分
+
+
+### 文件命名
+
+项目名、HTML 文件名、CSS文件名，LESS 文件名、JavaScript 文件名全部采用小写方式，以中划线分隔。 
+
 
 ## 优化
 
