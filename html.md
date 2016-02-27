@@ -412,6 +412,20 @@ HTML5 默认 type 为 `text/css`，所以没必要指定。即便是老浏览器
 <link href="long-path/foo.css" rel="stylesheet" >
 ```
 
+### style
+
+##### [强制] 使用 style 元素时，不允许加 `type="text/css"`
+
+```
+<!-- good -->
+<style>
+</style>
+
+<!-- bad -->
+<style type="text/css">
+</style>
+```
+
 ### 4.6 script
 
 ##### [强制] 使用script元素引用外部 javascript 文件时，不允许加 `type="text/javascript"` 
