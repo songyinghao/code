@@ -176,6 +176,22 @@ class 用于标识组件，相当于一个元素的名称，因此应该排在�
 <!-- /头部 -->
 ```
 
+当标签嵌套太多时，适当的注释也提高可读性
+
+```
+<div class="class1">
+    <div class="class2">
+        <div class="class3">
+            <div class="class4">
+
+                //...
+
+            </div>
+        </div><!-- /.class3 -->
+    </div><!-- /.class2 -->
+</div>
+```
+
 ## 3 语言特性
 
 ### 3.1 DOCTYPE
