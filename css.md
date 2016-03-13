@@ -146,7 +146,7 @@ ul>li {
 
 #### 2.2.3 空行
 
-##### [可选] 两个规则之间隔一行
+##### [可选] 两个规则之间隔一行，注释与规则之间不隔行
 
 ```
 /* good */
@@ -211,7 +211,7 @@ ul>li {
 
 #### 2.2.5 顺序
 
-##### [建议] 规则按元素在页面的顺序书写
+##### [建议] 规则按元素在页面的顺序书写（针对某个页面）
 
 从上到下，从左到右，从外到内。
 
@@ -293,12 +293,14 @@ opacity
 
 忽略浏览器的特定前缀排序，但多浏览器特定的某个CSS属性前缀应相对保持排序（例如-moz前缀在-webkit前面）。
 
+针对特殊浏览器的属性，应写在标准属性之前。
+
 ```
 background: fuchsia;
 border: 1px solid;
--moz-border-radius: 4px;
 -webkit-border-radius: 4px;
-border-radius: 4px;
+   -moz-border-radius: 4px;
+        border-radius: 4px;
 color: black;
 text-align: center;
 text-indent: 2em;
@@ -440,6 +442,8 @@ div .error {}
 虽然 ID 选择器效率最高，但应该优先考虑使用类选择器而不是 ID 选择器。
 
 而且，ID 选择器无法复用。
+
+强烈建议不用 ID 选择器来添加样式。
 
 ##### [建议] 性能与可维护性之间合理取舍
 
@@ -716,3 +720,7 @@ background: url(bg.png);
 ##### [强制] 禁止使用 Expression
 
 效率原因。
+
+##### [建议] 慎用 `!important`
+
+滥用 `!important` 使代码不易维护。代码中用了很多 importent 说明css的结构肯定有问题。
