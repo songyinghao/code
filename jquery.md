@@ -1,4 +1,4 @@
-[TOC]
+ [TOC]
 
 # JQuery 编码规范
 
@@ -14,97 +14,21 @@ v1.13 后的 1.x 版本中不再支持 IE6 和 IE7。
 
 v2.x 版本不再支持 IE6/7/8。
 
-## 插件开发
+在满足兼容性的前提下尽可能使用较新的版本，新版本性能方面更高。
 
-##### [建议] JQuery 插件代码文件的推荐命名方法为：jquery.插件名.js
-
-```
-jquery.lazyload.js
-
-jquery.posfixed.js
-```
-
-##### [建议] 针对新的 jQuery 版本开发
-
-在文件注释中注明适用的 jQuery 版本。
-
-##### [强制] 使用闭包
-
-这是 jQuery 官方的插件开发规范要求，这样做的好处：
-* 避免全局依赖。
-* 避免第三方破坏。
-* 兼容 jQuery 操作符 `$` 和 `jQuery`
+##### [建议] jquery 对象的命名以 `$` 开头
 
 ```
 // good
-(function($) {
-	$.fn.beautify = function() {
-		$(this).css('color', '#f00');
-		return this;	
-	}
-})(jQuery);
+var $account = $('#account');
 
-// bad
-$.fn.beautify = function() {
-	$(this).css('color', '#f00');
-	return this;	
-};
+// not good
+var account = $('#account');
 ```
 
-##### [强制] 插件应该返回一个JQuery对象，以便保证插件的可链式操作
+##### [可选] 给插件名加个特殊前缀
 
-```
-// good
-$.fn.beautify = function() {
-	$(this).css('color', '#f00');
-	return this; // impotent
-};
-
-$('#foo').beautify().show();
-
-// bad
-$.fn.beautify = function() {
-	$(this).css('color', '#f00');
-};
-
-$('#foo').beautify().show(); // 出错
-```
-
-##### [建议] 接受options参数，以便控制插件的行为
-
-```
-$.fn.beautify = function(options) {
-	var defaults = { 
-		color: '#f00'
-	}; 
-	var opts = $.extend(defaults, options); 
-	
-	$(this).css('color', opts.color);
-	return this;
-};
-
-$('#foo').beautify();
-$('#foo').beautify({color: '#ff0'});
-```
-
-##### [建议] 暴露插件的默认设置 ，以便外面可以访问
-
-```
-(function($){
-
-	$.fn.beautify = function(options) {
-		var opts = $.extend({}, $.fn.beautify.defaults, options); 
-		
-		$(this).css('color', opts.color);
-		return this;
-	};
-
-	$.fn.beautify.defaults = { 
-		color: '#f00'
-	}; 
-	
-})(jQuery);
-```
+jQuery 插件太多，防止命名冲突
 
 ##### [建议] 不要将 CSS 与 Javascript 代码杂揉
 
@@ -114,14 +38,14 @@ $('#foo').css({'color':red, 'font-weight':'bold'});
 
 // good
 .error {
-	color: red;
-	font-weight: bold;
+    color: red;
+    font-weight: bold;
 }
 $('#foo').addClass('error'); 
 ```
 
 2. 扩展
- 
+
 > jQuery提供了2个供用户扩展的‘基类’ - $.extend和$.fn.extend.
 > $.extend 用于扩展自身方法，如$.ajax, $.getJSON等，$.fn.extend则是用于扩展jQuery类，包括方法和对jQuery对象的操作。为了保持jQuery的完整性，我比较 趋向于使用$.fn.extend进行插件开发而尽量少使用$.extend.
 
@@ -130,42 +54,66 @@ $('#foo').addClass('error');
 
 ```
 (function ($) {
-	//默认参数 (放在插件外面，避免每次调用插件都调用一次，节省内存)
-	var defaults = {
-		color: '红色'
-	};
+    //默认参数 (放在插件外面，避免每次调用插件都调用一次，节省内存)
+    var defaults = {
+        color: '红色'
+    };
 
-	//扩展
-	$.fn.extend({
-	//插件名称
-	height: function (options) {
-	//覆盖默认参数
-	var opts = $.extend(defaults, options);
-	//主函数
-	return this.each(function () {
-	//激活事件
-	var obj = $(this);
-	obj.click(function () {
-	alert(opts.color);
-	});
-	});
-	}
-	})
-	})(jQuery);
-	$(function () {
-	$("p").height({ color: 'black' });
+    //扩展
+    $.fn.extend({
+    //插件名称
+    height: function (options) {
+    //覆盖默认参数
+    var opts = $.extend(defaults, options);
+    //主函数
+    return this.each(function () {
+    //激活事件
+    var obj = $(this);
+    obj.click(function () {
+    alert(opts.color);
+    });
+    });
+    }
+    })
+    })(jQuery);
+    $(function () {
+    $("p").height({ color: 'black' });
 });
 ``` 
- 
-##### [建议] 开发效率与执行效率的合理选择
 
-适当地使用原生 JavaScript，而不是全都用 JQuery实现。
+##### [建议] 合理地使用链式操作
+
+
+##### [建议] 适当地使用原生 Ja
+
+精简代码。
+
+使用链式的同时，注意缩进和换行，保持代码的可读性。
+可能带来代码的难以阅读。添加缩紧和换行能起到很好的效果。
+
+##### [建议] 适当地使用原生 JavaScript
+
+适当地使用原生 JavaScript，提高效率。
 
 ##### [建议] 使用高效率的选择器
 
+效率从高到低：
 
-* 尽量用 ID 选择器
-* 
+* ID 选择器
+* 标签选择器和类选择器（类选择器在IE8 及以下版本效率较低）
+* 伪类选择器、属性选择器等。
+
+选择子类的方法中，效率从高到低：
+
+```
+$parent.find('.child')
+$('.child', $parent)
+$('.child', $('#parent'))
+$parent.children('.child')
+$('#parent > .child')
+$('#parent .child')
+```
+
 ##### [建议] 使用对象来传递参数
 
 ```
@@ -188,13 +136,9 @@ $myLink.attr({
 
 不使用摒弃了的方法，如 `live`。
 
-推荐使用新的方法。
+推荐使用新的方法。效率高、便于系统升级维护。
 
 如 JQuery 从 1.7 版本开始将 bind()、live() 和 delegate() 方法合并成了 on() 方法。
-
-##### [可选] 给插件名加个特殊前缀
-
-jQuery 插件太多，防止命名冲突
 
 
 ##### [建议] 使用 CDN
@@ -212,20 +156,13 @@ http://libs.baidu.com/jquery/2.0.3/jquery.min.js
 
 为了保险起见，当无法从CDN服务器上获取jQuery时，则使用本地jQuery
 
-<script type="text/javascript">window.jQuery||document.write('<scriptsrc="//localhost/jQuery/jquery-2.1.0.min.js"><\/script>');</script>
-在Wordpress主题中使用的方法为
-1
-
-<script type="text/javascript">window.jQuery||document.write('<scripttype="text/javascript"src="<?phpechoget_template_directory_uri();?>/jquery.min.js">\x3C/script>')</script>
+```
+<script>
+window.jQuery || document.write('<scriptsrc="//localhost/jQuery/jquery-2.1.0.min.js"><\/script>');
+</script>
+```
 
 推荐使用国内CDN公共库，速度更快，稳定性更高。
-
-##### [建议] 尽可能使用较新的版本
-
-如果需要兼容 IE6/7/8，不要用 2.x 的版本。
-
-
-## DOM 操作
 
 ##### [建议] 使用连接字符串或数组join()，然后再append()。
 
@@ -278,4 +215,143 @@ $.ajax({
 // bad
 $.ajax({
     url: "something.php?param1=test1&param2=test2",....});
+```
+
+## 插件开发
+
+### 相关规范
+
+##### [建议] JQuery 插件代码文件的推荐命名方法为：jquery.插件名.js
+
+```
+jquery.lazyload.js
+
+jquery.posfixed.js
+```
+
+##### [建议] 针对新的 jQuery 版本开发
+
+在文件注释中注明适用的 jQuery 版本。
+
+##### [强制] 使用闭包
+
+这是 jQuery 官方的插件开发规范要求，这样做的好处：
+* 避免全局依赖。
+* 避免第三方破坏。
+* 兼容 jQuery 操作符 `$` 和 `jQuery`
+
+```
+// good
+(function($) {
+    $.fn.beautify = function() {
+        $(this).css('color', '#f00');
+        return this;    
+    }
+})(jQuery);
+
+// bad
+$.fn.beautify = function() {
+    $(this).css('color', '#f00');
+    return this;    
+};
+```
+
+##### [强制] 插件应该返回一个JQuery对象，以便保证插件的可链式操作
+
+```
+// good
+$.fn.beautify = function() {
+    $(this).css('color', '#f00');
+    return this; // impotent
+};
+
+$('#foo').beautify().show();
+
+// bad
+$.fn.beautify = function() {
+    $(this).css('color', '#f00');
+};
+
+$('#foo').beautify().show(); // 出错
+```
+
+##### [建议] 接受options参数，以便控制插件的行为
+
+```
+$.fn.beautify = function(options) {
+    var defaults = { 
+        color: '#f00'
+    }; 
+    var opts = $.extend(defaults, options); 
+    
+    $(this).css('color', opts.color);
+    return this;
+};
+
+$('#foo').beautify();
+$('#foo').beautify({color: '#ff0'});
+```
+
+##### [建议] 暴露插件的默认设置 ，以便外面可以访问
+
+```
+(function($){
+
+    $.fn.beautify = function(options) {
+        var opts = $.extend({}, $.fn.beautify.defaults, options); 
+        
+        $(this).css('color', opts.color);
+        return this;
+    };
+
+    $.fn.beautify.defaults = { 
+        color: '#f00'
+    }; 
+    
+})(jQuery);
+```
+
+### 插件模板
+
+对象级别的插件示例
+
+```
+;(function ($) {
+    /* 插件的定义 */
+    $.fn.beautify = function (options) {
+        var opts = $.extend({}, $.fn.beautify.defaults, options);
+
+        return this.each(function () {
+            $this = $(this);
+            var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+
+            $this.css({
+                "background-color":o.background,
+                "color":o.foreground
+            });
+
+            // ...
+        });
+    };
+
+    // 私有函数
+    function debug($obj) {
+        
+    }
+
+    // 公开方法
+    $.fn.beautify.strong = function (txt) {
+        return '<strong>' + txt + '</strong>';
+    };
+
+    // 插件的默认配置
+    $.fn.beautify.defaults = {
+        background: '#999',
+        color: '#f90'
+    };
+
+    /* 设置版本号 */
+    $.fn.beautify.version = 1.0;
+
+})(jQuery);
 ```
