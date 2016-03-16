@@ -139,7 +139,9 @@ javax imports
 public String getNameIfPresent() { ... }
 ```
 
-##### [建议] 单个注解可以和签名的第一行出现在同一行
+##### [可选] 单个注解允许和签名的第一行出现在同一行
+
+但是不推荐这么做。
 
 ```
 @Override public int hashCode() { ... }
