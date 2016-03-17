@@ -10,8 +10,6 @@ Javascript 编程必须遵守[通用编程规范](common.md)和本编程规范�
 
 ### 1.1 文件
 
-##### [推荐] Javascript文件使用无 BOM 的 UTF-8 编码
-
 ##### [建议] Javascript文件格式 `.js`，压缩文件格式 `.min.js`
 
 ```
