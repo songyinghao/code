@@ -55,6 +55,7 @@
 common.css
 index.css
 ```
+
 ##### [强制] 禁止在 CSS 中使用 `@import`
 
 > `@import` 引用的文件只有在引用它的那个css文件被下载、解析之后，才开始下载，这导致css解析、页面渲染延迟，可能导致页面长时间空白。
@@ -184,13 +185,13 @@ ul>li {
 ```
 /* good */
 .foo {
-	color: #f00;
-	font-size: 18px;
+    color: #f00;
+    font-size: 18px;
 }
 
 /* bad */
 .foo {
-	color: #f00; font-size: 18px;
+    color: #f00; font-size: 18px;
 }
 ```
 
@@ -199,12 +200,12 @@ ul>li {
 ```
 /* good */
 .foo {
-	color: #fff;
+    color: #fff;
 }
 
 /* bad */
 .foo {
-	color: #fff; }
+    color: #fff; }
 ```
 
 #### 2.2.5 顺序
@@ -554,8 +555,8 @@ div .error {}
     color: #f00
 }
 .foo {
-	color: #fff;
-	font-size: 18px
+    color: #fff;
+    font-size: 18px
 }
 ```
 
@@ -586,19 +587,19 @@ div .error {}
 ```
 /* good */
 .foo {
-	margin-bottom: 10px;
-	background-color: red;
-	background-image: url(image.jpg);
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+    margin-bottom: 10px;
+    background-color: red;
+    background-image: url(image.jpg);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 /* bad */
 .foo {
-	margin: 0 0 10px 0;
-	background: red;
-	background: url(image.jpg);
-	border-radius: 3px 3px 0 0;
+    margin: 0 0 10px 0;
+    background: red;
+    background: url(image.jpg);
+    border-radius: 3px 3px 0 0;
 }
 ```
 
