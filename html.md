@@ -54,7 +54,7 @@
 
 ## 1 前言
 
-无
+本规范作为[前端开发规范](web.md)的一部分，对 html 编码规范进行说明。
 
 ## 2 代码风格
 
@@ -74,7 +74,7 @@
 
 ```html
 <blockquote>
-	<p><em>Space</em>, the final frontier.</p>
+	<p><em>注意</em>, 用户名不能为空。</p>
 </blockquote>
 
 <ul>
@@ -303,7 +303,7 @@ DOCTYPE 不可省略。
 ```
 
 
-##### [建议] 属性值必须小写（除了文本和 CDATA ）
+##### [强制] html 定义的属性值必须小写
 
 ```
 <!-- good -->
