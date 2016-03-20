@@ -307,4 +307,14 @@ var f = function () {     /*@cc_on if (@_jscript) { return 2* @*/  3; /*@ } @*/ 
 
 条件注释妨碍自动化工具的执行, 因为在运行时, 它们会改变 JavaScript 语法树.
 
-## AMD 规范
+## 模块化开发
+
+模块化开发不是必须的，如果采用模块化开发，建议遵守以下规范。
+
+##### [建议] 建议使用 AMD 规范
+
+通过 requireJs 来实现模块化。
+
+##### [建议] 采用 `define(factory)` 的方式进行模块定义
+
+不采用 `define(moduleId, deps, factory)` 的方式，因为这种方式很容易出现很长的deps，影响代码的风格。
