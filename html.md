@@ -138,8 +138,9 @@
 id 用于标识具体组件，排在第一位。
 class 用于标识组件，相当于一个元素的名称，因此应该排在第二位。
 
+### 2.3 命名
 
-### 2.3  注释
+### 2.4 注释
 
 ##### [建议] 在模块的开始和结束位置添加模块开始/结束注释
 
@@ -287,6 +288,25 @@ DOCTYPE 不可省略。
 
 <!-- bad -->
 <img class="post-image" src="default.jpg" original-image="foo.png">
+```
+
+##### [建议] 自定义属性全部字母小写，单词间连字符分隔
+
+自定义属性命名符合 `[a-zA-Z-]+`
+
+命名尽可能只包含一个单词（不包括 data）。
+
+```
+<!-- good -->
+<p data-target="img"></p>
+
+<!-- not good -->
+<p data-target-tag="img"></p>
+
+<!-- bad -->
+<p data-targetTag="img"></p>
+<p targetTag="img"></p>
+<p tag="foo"></p>
 ```
 
 ##### [强制] 属性值必须用双引号包围
