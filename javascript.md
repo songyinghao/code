@@ -296,6 +296,13 @@ if (noValue === null || typeof noValue === 'undefined') {
 
 ##### [强制] 禁止修改内置对象的原型
 
+```
+// bad
+String.prototype.trim = function () {
+
+};
+```
+
 ##### [强制] 禁止在 javascript 中使用 IE 下的条件注释
 
 
