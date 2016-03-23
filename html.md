@@ -370,9 +370,15 @@ DOCTYPE 不可省略。
 
 1. meta
 2. title
-3. link
-4. script
-5. style
+3. base
+4. link
+5. script
+6. style
+
+最重要的两点：
+
+保证设置编码 `<meta charset="">` 在最前面。
+保证 base 标签在 link 和 script 的前面。
 
 ### 4.3 title
 
