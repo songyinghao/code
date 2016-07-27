@@ -1,4 +1,4 @@
-# thinkphp 编码规范
+# ThinkPHP 编码规范
 
 ## 1 前言
 
