@@ -53,7 +53,7 @@ $foo = null;
 $foo = true;
 $foo = false;
 
-// nad
+// bad
 $foo = NULL;
 $foo = TRUE;
 $foo = FALSE;
@@ -104,4 +104,49 @@ $name = "MyName";
 
 没为什么，仅仅是为了统一而已。
 
+### 3.3 类、属性和方法
 
+##### [强制] 所有的属性和方法必须有可见性(public, protected, private)
+
+* abstract和final声明必须在可见性之前；
+* static声明必须在可见性之后。
+
+### 3.4 其他
+
+##### [强制] 源文件只能使用 <?php 这种标签
+
+```
+// good
+<?php echo $name; ?>
+
+// bad
+<?= $name; ?>
+```
+
+
+##### [强制] PHP5.3之后的代码必须使用正式的命名空间
+
+```
+namespace Vendor\Model;
+
+class Foo {
+}
+```
+
+##### [强制] 命名空间(namespace)的声明后面必须有一行空行
+
+##### [强制] 所有的导入(use)声明必须放在命名空间(namespace)声明的下面
+
+##### [强制] 一句声明中，必须只有一个导入(use)关键字
+
+##### [强制] 在导入(use)声明代码块后面必须有一行空行。
+
+```
+namespace Vendor\Package;
+
+use FooClass;
+use BarClass as Bar;
+use OtherVendor\OtherPackage\BazClass;
+
+// ...
+```
