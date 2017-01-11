@@ -1,5 +1,3 @@
- [TOC]
-
 # REST 规范
 
 ## 前言
@@ -183,7 +181,7 @@ https://api.example.com/books?version=1
 
 一个资源可以有多种形式的表示，例如json、xml、rss等。
 
-关于使用json还是xml，网上颇有争议。个人建议使用json，其优点就不多说了。当然，有些特殊情况还是xml更具优势。
+关于使用json还是xml，一般只使用json。（有特殊要求除外）
 
 如果需要返回多种资源，在HTTP-Header中指定。
 
