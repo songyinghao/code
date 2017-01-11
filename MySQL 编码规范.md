@@ -1,5 +1,3 @@
- [TOC]
-
 # MySQL 编码规范
 
 [1 前言](#user-content-1-前言)
