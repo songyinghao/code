@@ -1,5 +1,3 @@
-[TOC]
-
 # Javascript 编码规范
 
 ## 前言
