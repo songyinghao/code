@@ -1,5 +1,3 @@
- [TOC]
-
 [1 前言](#user-content-1-前言)
  
 [2 代码风格](#user-content-2-代码风格)
